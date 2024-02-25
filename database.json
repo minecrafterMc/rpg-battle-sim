@@ -56,7 +56,7 @@
                     "accuracy": 70
                 },
                 {
-                    "name": "throw",
+                    "name": "throw sword",
                     "desc": "you throw your sword at the enemy",
                     "type": "range",
                     "damageMin": 20,

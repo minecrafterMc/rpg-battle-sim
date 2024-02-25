@@ -20,7 +20,11 @@ var itemButton = new Button(215,315,165,75,0,"","", function(){console.log('item
 var switchButton = new Button(390,315,205,75,0,"","", function(){console.log('switch');});
 var switchButton = new Button(605,315,185,75,0,"","", function(){console.log('info');});
 var attackselbuttons = [
-    new Button(230,60,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selectedAttack = 0;renderframe();guibuttons();})
+    new Button(230,60,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selectedAttack = 0;renderframe();guibuttons();}),
+    new Button(230,95,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selectedAttack = 1;renderframe();guibuttons();}),
+    new Button(230,130,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selectedAttack = 2;renderframe();guibuttons();}),
+    new Button(230,165,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selectedAttack = 3;renderframe();guibuttons();}),
+    new Button(230,200,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selectedAttack = 4;renderframe();guibuttons();}),
 ]
 var selectedPMember = 0;
 var selectedAttack;
@@ -80,6 +84,10 @@ function tick()
     PHealth.height = (player.party[selectedPMember].hp / player.party[selectedPMember].maxhp) * 150;
     PStamina.width = (player.party[selectedPMember].stamina / player.party[selectedPMember].maxStamina) * 400;
     attackselbuttons[0].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[0].name;
+    attackselbuttons[1].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[1].name;
+    attackselbuttons[2].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[2].name;
+    attackselbuttons[3].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[3].name;
+    attackselbuttons[4].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[4].name;
     guibuttons();
 }
 function OnLoad()
