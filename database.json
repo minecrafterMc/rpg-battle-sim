@@ -1,0 +1,103 @@
+{
+    "items": [
+        {
+            "name": "healing potion",
+            "desc": "a basic healing potion",
+            "effects": {
+                "heal": 5,
+                "damage": 0,
+                "self-damage": 0
+            }
+        }
+    ],
+    "party": [
+        {
+            "name": "main",
+            "hp": 40,
+            "maxhp": 50,
+            "stamina": 50,
+            "maxStamina": 50,
+            "weapon": 0
+        }
+    ],
+    "weapons": [
+        {
+            "name": "basic sword",
+            "desc": "a very basic sword",
+            "durability": 5,
+            "maxDurability": 5,
+            "attacks": [
+                {
+                    "name": "swing",
+                    "desc": "swing your sword at the enemy",
+                    "type": "phisical",
+                    "damageMin": 5,
+                    "damageMax": 10,
+                    "staminaCost": 0,
+                    "staminaRecovery": 0,
+                    "healthCost": 0,
+                    "healthRecovery": 0,
+                    "durabilityCost": 1,
+                    "durabilityRecovery": 0,
+                    "accuracy": 100
+                },
+                {
+                    "name": "spin",
+                    "desc": "spin with your sword",
+                    "type": "phisical",
+                    "damageMin": 10,
+                    "damageMax": 25,
+                    "staminaCost": 5,
+                    "staminaRecovery": 0,
+                    "healthCost": 0,
+                    "healthRecovery": 0,
+                    "durabilityCost": 2,
+                    "durabilityRecovery": 0,
+                    "accuracy": 70
+                },
+                {
+                    "name": "throw",
+                    "desc": "you throw your sword at the enemy",
+                    "type": "range",
+                    "damageMin": 20,
+                    "damageMax": 25,
+                    "staminaCost": 5,
+                    "staminaRecovery": 0,
+                    "healthCost": 0,
+                    "healthRecovery": 0,
+                    "durabilityCost": 5,
+                    "durabilityRecovery": 0,
+                    "accuracy": 50
+                },
+                {
+                    "name": "rest",
+                    "desc": "you rest and recover hp and stamina",
+                    "type": "recovery",
+                    "damageMin": 0,
+                    "damageMax": 0,
+                    "staminaCost": 0,
+                    "staminaRecovery": 10,
+                    "healthCost": 0,
+                    "healthRecovery": 10,
+                    "durabilityCost": 0,
+                    "durabilityRecovery": 0,
+                    "accuracy": 100
+                },
+                {
+                    "name": "repair blade",
+                    "desc": "you try to repair your sword mid-battle",
+                    "type": "recovery",
+                    "damageMin": 0,
+                    "damageMax": 0,
+                    "staminaCost": 10,
+                    "staminaRecovery": 0,
+                    "healthCost": 0,
+                    "healthRecovery": 0,
+                    "durabilityCost": 0,
+                    "durabilityRecovery": 5,
+                    "accuracy": 90
+                }
+            ]
+        }
+    ]
+}
