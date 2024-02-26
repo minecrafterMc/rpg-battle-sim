@@ -108,6 +108,30 @@ class Cell
       }
     }
   }
+
+class Label
+{
+  constructor(x,y,text,fontSize,font,textalign,color)
+  {
+    this.bx = x;
+    this.by = y;
+    this.x = OutlineSize + (x - 1) * CellWidth + (x - 1) * BorderSize;
+    this.y = OutlineSize + (y - 1) * CellHeight + (y - 1) * BorderSize;
+    this.bp = x * 1 + (y - 1) * Columns;
+    this.text = text;
+    this.color = color;
+    this.fontsize = fontSize;
+    this.font = font;
+    this.textalign = textalign;
+  }
+  drawLabel()
+  {
+    ctx.font = this.fontsize + "px " + this.font;
+    ctx.fillStyle = this.color;
+    ctx.textAlign = this.textalign;
+    ctx.fillText(this.text,this.x,this.y);
+  }
+}
 class Button
 {
   constructor(x,y,width,height,opacity,text,background,onclick)

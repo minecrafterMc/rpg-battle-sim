@@ -251,7 +251,7 @@
           {
             "name": "swing",
             "desc": "swing your sword at the enemy",
-            "type": "phisical",
+            "type": "physical",
             "damageMin": 5,
             "damageMax": 10,
             "staminaCost": 0,
@@ -265,7 +265,7 @@
           {
             "name": "spin",
             "desc": "spin with your sword",
-            "type": "phisical",
+            "type": "physical",
             "damageMin": 10,
             "damageMax": 25,
             "staminaCost": 5,
