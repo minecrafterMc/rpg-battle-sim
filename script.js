@@ -16,7 +16,7 @@ var PHealth = new Cell(20,1,"red",false,"","UI",3,true,15,150)
 var PStamina = new Cell(1,8.6,"yellow",false,"","UI",3,true,400,8)
 var emptybar = new Cell(20,1,"black",false,"","UI",3,true,15,150)
 var attackButton = new Button(10,315,195,75,0,"","", function(){if (GUI != 1){GUI = 1;}else{GUI = 0;}renderframe();guibuttons();});
-var itemButton = new Button(215,315,165,75,0,"","", function(){console.log('item');});
+var itemButton = new Button(215,315,165,75,0,"","", function(){if (GUI != 3){GUI = 3;}else{GUI = 0;}renderframe();guibuttons();});
 var switchButton = new Button(390,315,205,75,0,"","", function(){console.log('switch');});
 var switchButton = new Button(605,315,185,75,0,"","", function(){console.log('info');});
 var attackselbuttons = [
@@ -26,8 +26,23 @@ var attackselbuttons = [
     new Button(230,165,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selectedAttack = 3;renderframe();guibuttons();}),
     new Button(230,200,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selectedAttack = 4;renderframe();guibuttons();}),
 ]
+var itemcatselbuttons = [
+    new Button(230,60,370,27,100,"text","grey", function(){if (GUI != 4){GUI = 4;}else{GUI = 0;}selecteditemcat = 0;renderframe();guibuttons();}),
+    new Button(230,95,370,27,100,"text","grey", function(){if (GUI != 4){GUI = 4;}else{GUI = 0;}selecteditemcat = 1;renderframe();guibuttons();}),
+    new Button(230,130,370,27,100,"text","grey", function(){if (GUI != 4){GUI = 4;}else{GUI = 0;}selecteditemcat = 2;renderframe();guibuttons();}),
+    new Button(230,165,370,27,100,"text","grey", function(){if (GUI != 4){GUI = 4;}else{GUI = 0;}selecteditemcat = 3;renderframe();guibuttons();}),
+    new Button(230,200,370,27,100,"text","grey", function(){if (GUI != 4){GUI = 4;}else{GUI = 0;}selecteditemcat = 4;renderframe();guibuttons();}),
+]
+var itemselbuttons = [
+    new Button(230,60,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selecteditem = 0;renderframe();guibuttons();}),
+    new Button(230,95,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selecteditem = 1;renderframe();guibuttons();}),
+    new Button(230,130,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selecteditem = 2;renderframe();guibuttons();}),
+    new Button(230,165,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selecteditem = 3;renderframe();guibuttons();}),
+    new Button(230,200,370,27,100,"text","grey", function(){if (GUI != 2){GUI = 2;}else{GUI = 0;}selecteditem = 4;renderframe();guibuttons();}),
+]
 var selectedPMember = 0;
-var selectedAttack;
+var selectedAttack = 0;
+var selecteditemcat = 0;
 var player;
 fetch("./database.json")
                 .then((res) => {
@@ -38,7 +53,7 @@ fetch("./database.json")
                     return res.json();
                 })
                 .then((data) => 
-                     player = data)
+                     player = data.player)
                 .catch((error) => 
                        console.error("Unable to fetch data:", error));
 var GUI = 1;
@@ -61,13 +76,46 @@ function guibuttons()
         attackselbuttons[3].show();
         attackselbuttons[4].show();
     }
+    if (GUI != 3)
+    {
+      itemcatselbuttons[0].hide();
+      itemcatselbuttons[1].hide();
+      itemcatselbuttons[2].hide();
+      itemcatselbuttons[3].hide();
+      itemcatselbuttons[4].hide();
+    }
+    else if (GUI == 3)
+    {
+      itemcatselbuttons[0].show();
+      itemcatselbuttons[1].show();
+      itemcatselbuttons[2].show();
+      itemcatselbuttons[3].show();
+      itemcatselbuttons[4].show();
+    }
+    if (GUI != 4)
+    {
+      itemselbuttons[0].hide();
+      itemselbuttons[1].hide();
+      itemselbuttons[2].hide();
+      itemselbuttons[3].hide();
+      itemselbuttons[4].hide();
+    }
+    else if (GUI == 4)
+    {
+      itemselbuttons[0].show();
+      itemselbuttons[1].show();
+      itemselbuttons[2].show();
+      itemselbuttons[3].show();
+      itemselbuttons[4].show();
+    }
 }
 function rendergui()
 {
-    if (GUI == 1)
+    if (GUI == 1 || GUI == 3 || GUI == 4)
     {
         attacksel.drawCell();
     }
+    guibuttons()
 }
 function renderframe()
 {
@@ -88,11 +136,21 @@ function tick()
     attackselbuttons[2].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[2].name;
     attackselbuttons[3].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[3].name;
     attackselbuttons[4].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[4].name;
+    itemcatselbuttons[0].buttonElement.innerHTML = player.itemTypes[0].name;
+    itemcatselbuttons[1].buttonElement.innerHTML = player.itemTypes[1].name;
+    itemcatselbuttons[2].buttonElement.innerHTML = player.itemTypes[2].name;
+    itemcatselbuttons[3].buttonElement.innerHTML = player.itemTypes[3].name;
+    itemcatselbuttons[4].buttonElement.innerHTML = player.itemTypes[4].name;
+    itemselbuttons[0].buttonElement.innerHTML = player.items[selecteditemcat][0].name;
+    itemselbuttons[1].buttonElement.innerHTML = player.items[selecteditemcat][1].name;
+    itemselbuttons[2].buttonElement.innerHTML = player.items[selecteditemcat][2].name;
+    itemselbuttons[3].buttonElement.innerHTML = player.items[selecteditemcat][3].name;
+    itemselbuttons[4].buttonElement.innerHTML = player.items[selecteditemcat][4].name;
     guibuttons();
 }
 function OnLoad()
 {
-    
+    document.getElementById("main").requestFullscreen()
 }
 setup()
 const ticks = setInterval(tick, 1000 / TicksPerSec)
