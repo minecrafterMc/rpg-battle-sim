@@ -11,7 +11,7 @@
           "effects": {
             "heal": 10,
             "damage": 0,
-            "self-damage": 0,
+            "selfDamage": 0,
             "staminaRecovery": 0,
             "staminaCost": 0,
             "weaponDurabilityRecovery": 0
@@ -26,7 +26,7 @@
           "effects": {
             "heal": 0,
             "damage": 0,
-            "self-damage": 0,
+            "selfDamage": 0,
             "staminaRecovery": 10,
             "staminaCost": 0,
             "weaponDurabilityRecovery": 0
@@ -41,7 +41,7 @@
           "effects": {
             "heal": 0,
             "damage": 10,
-            "self-damage": 0,
+            "selfDamage": 0,
             "staminaRecovery": 0,
             "staminaCost": 0,
             "weaponDurabilityRecovery": 0
@@ -56,7 +56,7 @@
           "effects": {
             "heal": 0,
             "damage": 20,
-            "self-damage": 10,
+            "selfDamage": 10,
             "staminaRecovery": 0,
             "staminaCost": 0,
             "weaponDurabilityRecovery": 0
@@ -72,7 +72,7 @@
           "effects": {
             "heal": 20,
             "damage": 0,
-            "self-damage": 0,
+            "selfDamage": 0,
             "staminaRecovery": 0,
             "staminaCost": 0,
             "weaponDurabilityRecovery": 0
@@ -250,7 +250,7 @@
         "attacks": [
           {
             "name": "swing",
-            "desc": "swing your sword at the enemy",
+            "desc": "swing your sword at the enemy hndhdbd",
             "type": "physical",
             "damageMin": 5,
             "damageMax": 10,
@@ -328,7 +328,35 @@
         "name": "goblin",
         "hp": 50,
         "maxhp": 50,
-        "weapon": 0
+        "attacks": [
+          {
+            "name": "steal",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 10,
+            "special": "steal"
+          },
+          {
+            "name": "stab",
+            "damageMin": 1,
+            "damageMax": 5,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 90,
+            "special": "none"
+          },
+          {
+            "name": "rest",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 3,
+            "accuracy": 10,
+            "special": "none"
+          }
+          ]
       }
       ]
   }

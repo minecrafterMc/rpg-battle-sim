@@ -5,6 +5,9 @@ function sleep(ms) {
     }, ms);
   });
 }
+function RandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 class Cell
 {
   constructor(x,y,color,addtexture,image,CellType,id,useCustomSize,width,height)
