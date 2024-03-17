@@ -116,6 +116,7 @@ var currentEnemy = 0;
 var player;
 var enemy;
 var database;
+var sEffect = 0;
 function setvar(data)
 {
   database = data;
@@ -305,18 +306,47 @@ function OnLoad()
   
 }
 
+function RandomChance(percent)
+{
+  if (percent > 100)
+  {
+    percent = 100;
+  }
+  if (RandomInt(1,100) < percent)
+  {
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function Critical(damage)
+{
+  if ( player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].type != "recovery")
+  {
+  if (RandomChance(10 + player.sEffects[sEffect].critBonus))
+  {
+    alert("critical");
+    return damage * 1.7;
+    
+  }
+  else{
+    return damage;
+  }
+  }
+  else{
+    return damage;
+  }
+}
 function endTurn(action)
 {
-  if (enemy.types[currentEnemy].hp == 0)
-  {
-    enemy.types[currentEnemy] = database.enemy.types[currentEnemy];
-  }
   if (action == "attack")
   {
     GUI = 0;
     if (player.party[selectedPMember].stamina > 0 && player.weapons[player.party[selectedPMember].weapon].durability > 0 || player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].type == "recovery")
     {
-      if (RandomInt(1,100) < player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].accuracy)
+      if (RandomInt(1,100) < player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].accuracy + player.sEffects[sEffect].accuracyBonus)
       {
         player.weapons[player.party[selectedPMember].weapon].durability
         player.party[selectedPMember].hp -= player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthCost;
@@ -331,12 +361,13 @@ function endTurn(action)
         player.weapons[player.party[selectedPMember].weapon].durability += player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].durabilityRecovery;
         if (player.weapons[player.party[selectedPMember].weapon].durability > player.weapons[player.party[selectedPMember].weapon].maxDurability) { player.weapons[player.party[selectedPMember].weapon].durability = player.weapons[player.party[selectedPMember].weapon].maxDurability }
         else if (player.weapons[player.party[selectedPMember].weapon].durability < 0) { player.weapons[player.party[selectedPMember].weapon].durability = 0 }
-        enemy.types[currentEnemy].hp -= RandomInt(player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMin,player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMax);
+        enemy.types[currentEnemy].hp -= Critical(RandomInt(player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMin,player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMax));
       }
       else{
         alert("missed");
       }
     }
+    sEffect = player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].sEffect;
   }
   else if (action == "item")
   {
@@ -359,8 +390,8 @@ function endTurn(action)
   }
   if (enemy.types[currentEnemy].hp < 0)
   {
-    enemy.types[currentEnemy].hp = enemy.types[currentEnemy.maxhp];
-    currentEnemy = RandomInt(0,enemy.types.length);
+    enemy.types[currentEnemy].hp = enemy.types[currentEnemy].maxhp;
+    currentEnemy = RandomInt(0,enemy.types.length - 1);
     
   }
   else{
