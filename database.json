@@ -14,7 +14,9 @@
             "selfDamage": 0,
             "staminaRecovery": 0,
             "staminaCost": 0,
-            "weaponDurabilityRecovery": 0
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
           }
           },
         {
@@ -29,27 +31,31 @@
             "selfDamage": 0,
             "staminaRecovery": 10,
             "staminaCost": 0,
-            "weaponDurabilityRecovery": 0
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
           }
             },
         {
-          "name": "rock",
-          "desc": "its just a rock",
+          "name": "calming potion",
+          "desc": "a potion that makes you more focused",
           "usableBy": -1,
           "mostEffective": 6,
-          "amount": 5,
+          "amount": 3,
           "effects": {
             "heal": 0,
-            "damage": 10,
+            "damage": 0,
             "selfDamage": 0,
             "staminaRecovery": 0,
             "staminaCost": 0,
-            "weaponDurabilityRecovery": 0
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 1
           }
             },
         {
           "name": "spike ball",
-          "desc": "Aspike ball to throw",
+          "desc": "A spike ball to throw",
           "usableBy": -1,
           "mostEffective": -1,
           "amount": 1,
@@ -59,7 +65,9 @@
             "selfDamage": 10,
             "staminaRecovery": 0,
             "staminaCost": 0,
-            "weaponDurabilityRecovery": 0
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
           }
 
       },
@@ -75,12 +83,101 @@
             "selfDamage": 0,
             "staminaRecovery": 0,
             "staminaCost": 0,
-            "weaponDurabilityRecovery": 0
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
           }
       }
-        ]
+        ],
+        [
+        {
+          "name": "the scroll of blood",
+          "desc": "a scroll containing a powerfull spell",
+          "usableBy": 3,
+          "mostEffective": -1,
+          "amount": 2,
+          "effects": {
+            "heal": 0,
+            "damage": 20,
+            "selfDamage": 10,
+            "staminaRecovery": 0,
+            "staminaCost": 0,
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
+          }
+          },
+        {
+          "name": "",
+          "desc": "a basic stamina recovery potion",
+          "usableBy": -1,
+          "mostEffective": 3,
+          "amount": 2,
+          "effects": {
+            "heal": 0,
+            "damage": 0,
+            "selfDamage": 0,
+            "staminaRecovery": 10,
+            "staminaCost": 0,
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
+          }
+            },
+        {
+          "name": "rock",
+          "desc": "its just a rock",
+          "usableBy": -1,
+          "mostEffective": 6,
+          "amount": 5,
+          "effects": {
+            "heal": 0,
+            "damage": 10,
+            "selfDamage": 0,
+            "staminaRecovery": 0,
+            "staminaCost": 0,
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
+          }
+            },
+        {
+          "name": "spike ball",
+          "desc": "A spike ball to throw",
+          "usableBy": -1,
+          "mostEffective": -1,
+          "amount": 1,
+          "effects": {
+            "heal": 0,
+            "damage": 20,
+            "selfDamage": 10,
+            "staminaRecovery": 0,
+            "staminaCost": 0,
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
+          }
 
-    ],
+      },
+        {
+          "name": "big healing potion",
+          "desc": "a big healing potion",
+          "usableBy": -1,
+          "mostEffective": -1,
+          "amount": 1,
+          "effects": {
+            "heal": 20,
+            "damage": 0,
+            "selfDamage": 0,
+            "staminaRecovery": 0,
+            "staminaCost": 0,
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
+          }
+      }
+      ]
+        ],
     "itemTypes": [
       {
         "name": "misc"
@@ -152,8 +249,8 @@
     "party": [
       {
         "name": "fredric",
-        "class": "swordfighter",
-        "hp": 40,
+        "class": 1,
+        "hp": 50,
         "maxhp": 50,
         "stamina": 50,
         "maxStamina": 50,
@@ -181,7 +278,8 @@
             "healthRecovery": 0,
             "durabilityCost": 0,
             "durabilityRecovery": 0,
-            "accuracy": 100
+            "accuracy": 100,
+            "sEffect": 0
                       },
           {
             "name": "throw a stone",
@@ -195,7 +293,8 @@
             "healthRecovery": 0,
             "durabilityCost": 0,
             "durabilityRecovery": 0,
-            "accuracy": 60
+            "accuracy": 60,
+            "sEffect": 0
                       },
           {
             "name": "full sprint charge",
@@ -209,7 +308,8 @@
             "healthRecovery": 0,
             "durabilityCost": 0,
             "durabilityRecovery": 0,
-            "accuracy": 80
+            "accuracy": 80,
+            "sEffect": 0
                       },
           {
             "name": "rest",
@@ -223,7 +323,8 @@
             "healthRecovery": 10,
             "durabilityCost": 0,
             "durabilityRecovery": 0,
-            "accuracy": 100
+            "accuracy": 100,
+            "sEffect": 0
                       },
           {
             "name": "meditate",
@@ -237,7 +338,8 @@
             "healthRecovery": 0,
             "durabilityCost": 0,
             "durabilityRecovery": 0,
-            "accuracy": 100
+            "accuracy": 100,
+            "sEffect": 0
                       }
                   ]
       },
@@ -250,7 +352,7 @@
         "attacks": [
           {
             "name": "swing",
-            "desc": "swing your sword at the enemy hndhdbd",
+            "desc": "swing your sword at the enemy",
             "type": "physical",
             "damageMin": 5,
             "damageMax": 10,
@@ -260,7 +362,8 @@
             "healthRecovery": 0,
             "durabilityCost": 1,
             "durabilityRecovery": 0,
-            "accuracy": 100
+            "accuracy": 100,
+            "sEffect": 0
                 },
           {
             "name": "spin",
@@ -274,7 +377,8 @@
             "healthRecovery": 0,
             "durabilityCost": 2,
             "durabilityRecovery": 0,
-            "accuracy": 70
+            "accuracy": 70,
+            "sEffect": 0
                 },
           {
             "name": "throw sword",
@@ -288,7 +392,8 @@
             "healthRecovery": 0,
             "durabilityCost": 5,
             "durabilityRecovery": 0,
-            "accuracy": 50
+            "accuracy": 50,
+            "sEffect": 0
                 },
           {
             "name": "rest",
@@ -302,7 +407,8 @@
             "healthRecovery": 10,
             "durabilityCost": 0,
             "durabilityRecovery": 0,
-            "accuracy": 100
+            "accuracy": 100,
+            "sEffect": 0
                 },
           {
             "name": "repair blade",
@@ -316,11 +422,32 @@
             "healthRecovery": 0,
             "durabilityCost": 0,
             "durabilityRecovery": 5,
-            "accuracy": 90
+            "accuracy": 90,
+            "sEffect": 0
                 }
             ]
         }
-    ]
+    ],
+    "specialEffects": [
+      {
+        "name": "",
+        "desc": "",
+          "critBonus": 0,
+          "accuracyBonus": 0,
+          "attackBonus": 0,
+          "staminaBonus": 0
+        
+      },
+      {
+        "name": "focus",
+        "desc": "",
+          "critBonus":30,
+          "accuracyBonus": 30,
+          "attackBonus":5,
+          "staminaBonus": 10
+        
+      }
+      ]
   },
   "enemy": {
     "types": [
@@ -344,7 +471,7 @@
             "damageMax": 5,
             "healthCost": 0,
             "healthRecovery": 0,
-            "accuracy": 90,
+            "accuracy": 100,
             "special": "none"
           },
           {
@@ -353,7 +480,7 @@
             "damageMax": 0,
             "healthCost": 0,
             "healthRecovery": 3,
-            "accuracy": 10,
+            "accuracy": 70,
             "special": "none"
           }
           ]

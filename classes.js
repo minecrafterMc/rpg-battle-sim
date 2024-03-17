@@ -161,6 +161,30 @@ class Button
     this.buttonElement.style.display = "block";
   }
 }
+class audio
+{
+  constructor(soundfile,volume)
+  {
+    this.audioElement = new Audio(soundfile);
+    this.audioElement.volume = volume;
+  }
+  play()
+  {
+    this.audioElement.play();
+  }
+  stop()
+  {
+    this.audioElement.stop();
+  }
+  pause()
+  {
+    this.audioElement.pause();
+  }
+  unpause()
+  {
+    this.audioElement.play();
+  }
+}
 class CellAnimation
 {
   constructor(frames,fps)
