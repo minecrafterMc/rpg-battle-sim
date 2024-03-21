@@ -2,13 +2,16 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 ctx.font = "12px Arial";
 ctx.textAlign = "left";
-
+ctx.imageSmoothingEnabled = false;
+ctx.mozImageSmoothingEnabled = false;
+ctx.webkitImageSmoothingEnabled = false;
 const CanvasHeight = 2 * OutlineSize + (Rows - 1) * BorderSize + Rows * CellHeight;
 const CanvasWidth = 2 * OutlineSize + (Columns - 1) * BorderSize + Columns * CellWidth;
 const SpacesOnGrid = Rows * Columns;
 document.getElementById("canvas").width = CanvasWidth;
 document.getElementById("canvas").height = CanvasHeight;
 var Board = [];
+var icons = new spriteSheet("assets/spritesheets/smallicons.png",14,16,1,3);
 var Background = new Cell(1, 1, "blue", true, "assets/images/background1.png", "cellEngine", 1, false, 1, 1);
 var UI = new Cell(1, 1, "blue", true, "assets/images/ui.png", "cellEngine", 2, false, 1, 1);
 var attacksel = new Cell(1, 1, "blue", true, "assets/images/attackui.png", "cellEngine", 2, false, 1, 1);
@@ -244,7 +247,7 @@ function renderframe()
   EHealth.drawCell();
   PStamina.drawCell();
   PDurability.drawCell();
-  
+  icons.drawSpriteCustomSize(5,5,50,50,3);
   rendergui();
   popupLabel.drawLabel();
 }

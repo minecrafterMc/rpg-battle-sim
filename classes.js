@@ -24,9 +24,17 @@ class Cell
     this.bp = x * 1 + (y - 1) * Columns;
     if (addtexture)
     {
+      if (typeof(image) == "string")
+      {
       this.useTexture = true;
       this.imgElement = document.createElement("img");
       this.imgElement.src = image;
+      }
+      else {
+        this.useTexture = true;
+        this.imgElement = image;
+        
+      }
     }
     else{
       this.useTexture = false;
@@ -112,6 +120,43 @@ class Cell
     }
   }
 
+class spriteSheet
+{
+  constructor(imageSource,spriteHeight,spriteWidth,sheetRows,sheetColumns)
+  {
+    this.imgElement = document.createElement("img");
+    this.imgElement.src = imageSource;
+    this.spriteHeight = spriteHeight;
+    this.spriteWidth = spriteWidth;
+    this.sheetRows = sheetRows;
+    this.sheetColumns = sheetColumns;
+    this.sprites = [];
+    let i = 0;
+    let currentRow = 1;
+    let currentColumn = 1;
+    while (i != sheetRows * sheetColumns)
+    {
+      this.sprites[i] = {};
+      this.sprites[i].x = this.spriteWidth * (currentColumn - 1);
+      this.sprites[i].y = this.spriteHeight * (currentRow - 1);
+      currentColumn++;
+      if (currentColumn > this.sheetColumns)
+      {
+        currentRow++;
+        currentColumn = 1;
+      }
+      i++;
+    }
+  }
+  drawSprite(x,y,id)
+  {
+    ctx.drawImage(this.imgElement,this.sprites[id - 1].x,this.sprites[id - 1].y, this.spriteWidth, this.spriteHeight,OutlineSize + (x - 1) * CellWidth + (x - 1) * BorderSize,OutlineSize + (y - 1) * CellHeight + (y - 1) * BorderSize, this.spriteWidth, this.spriteHeight);
+  }
+  drawSpriteCustomSize(x, y,dwidth,dheight, id)
+{
+  ctx.drawImage(this.imgElement, this.sprites[id - 1].x, this.sprites[id - 1].y, this.spriteWidth, this.spriteHeight, OutlineSize + (x - 1) * CellWidth + (x - 1) * BorderSize, OutlineSize + (y - 1) * CellHeight + (y - 1) * BorderSize, dwidth,dheight);
+}
+}
 class Label
 {
   constructor(x,y,text,fontSize,font,textalign,color)
