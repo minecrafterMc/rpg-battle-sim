@@ -8,6 +8,8 @@
           "usableBy": -1,
           "mostEffective": 3,
           "amount": 3,
+          "iconSheet": "assets/spritesheets/micsitems.png",
+          "icon": 1,
           "effects": {
             "heal": 10,
             "damage": 0,
@@ -19,6 +21,23 @@
             "sEffect": 0
           }
           },
+        {
+          "name": "big healing potion",
+          "desc": "a big healing potion",
+          "usableBy": -1,
+          "mostEffective": -1,
+          "amount": 1,
+          "effects": {
+            "heal": 20,
+            "damage": 0,
+            "selfDamage": 0,
+            "staminaRecovery": 0,
+            "staminaCost": 0,
+            "weaponDurabilityRecovery": 0,
+            "weaponSwitch": -1,
+            "sEffect": 0
+          }
+},
         {
           "name": "stamina potion",
           "desc": "a basic stamina recovery potion",
@@ -70,23 +89,6 @@
             "sEffect": 0
           }
 
-      },
-        {
-          "name": "big healing potion",
-          "desc": "a big healing potion",
-          "usableBy": -1,
-          "mostEffective": -1,
-          "amount": 1,
-          "effects": {
-            "heal": 20,
-            "damage": 0,
-            "selfDamage": 0,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
       }
         ],
         [
@@ -246,6 +248,12 @@
         "recoveryMulti": 2
       }
     ],
+    "attackTypes": {
+      "recovery": 1,
+      "physical": 2,
+      "ranged": 3,
+      "magic": 4
+    },
     "party": [
       {
         "name": "fredric",
@@ -432,20 +440,20 @@
       {
         "name": "",
         "desc": "",
-          "critBonus": 0,
-          "accuracyBonus": 0,
-          "attackBonus": 0,
-          "staminaBonus": 0
-        
+        "critBonus": 0,
+        "accuracyBonus": 0,
+        "attackBonus": 0,
+        "staminaBonus": 1
+
       },
       {
         "name": "focus",
         "desc": "",
-          "critBonus":30,
-          "accuracyBonus": 30,
-          "attackBonus":5,
-          "staminaBonus": 10
-        
+        "critBonus": 30,
+        "accuracyBonus": 30,
+        "attackBonus": 5,
+        "staminaBonus": 1
+
       }
       ]
   },

@@ -152,8 +152,8 @@ class spriteSheet
   {
     ctx.drawImage(this.imgElement,this.sprites[id - 1].x,this.sprites[id - 1].y, this.spriteWidth, this.spriteHeight,OutlineSize + (x - 1) * CellWidth + (x - 1) * BorderSize,OutlineSize + (y - 1) * CellHeight + (y - 1) * BorderSize, this.spriteWidth, this.spriteHeight);
   }
-  drawSpriteCustomSize(x, y,dwidth,dheight, id)
-{
+  drawSpriteCustomSize(x,y,dwidth,dheight, id)
+  {
   ctx.drawImage(this.imgElement, this.sprites[id - 1].x, this.sprites[id - 1].y, this.spriteWidth, this.spriteHeight, OutlineSize + (x - 1) * CellWidth + (x - 1) * BorderSize, OutlineSize + (y - 1) * CellHeight + (y - 1) * BorderSize, dwidth,dheight);
 }
 }

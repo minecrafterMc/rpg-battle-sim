@@ -11,7 +11,8 @@ const SpacesOnGrid = Rows * Columns;
 document.getElementById("canvas").width = CanvasWidth;
 document.getElementById("canvas").height = CanvasHeight;
 var Board = [];
-var icons = new spriteSheet("assets/spritesheets/smallicons.png",14,16,1,3);
+var weaponIcons = new spriteSheet("assets/spritesheets/smallicons.png",14,16,1,3);
+var attackIcons = new spriteSheet("assets/spritesheets/attackIcons.png",240,240,1,4);
 var Background = new Cell(1, 1, "blue", true, "assets/images/background1.png", "cellEngine", 1, false, 1, 1);
 var UI = new Cell(1, 1, "blue", true, "assets/images/ui.png", "cellEngine", 2, false, 1, 1);
 var attacksel = new Cell(1, 1, "blue", true, "assets/images/attackui.png", "cellEngine", 2, false, 1, 1);
@@ -28,7 +29,7 @@ var attackButton = new Button(10, 315, 195, 75, 0, "", "", function() { if (GUI 
 var itemButton = new Button(215, 315, 165, 75, 0, "", "", function() { if (GUI != 3) { GUI = 3; } else { GUI = 0; } renderframe();
   guibuttons(); });
 var switchButton = new Button(390, 315, 205, 75, 0, "", "", function() { console.log('switch'); });
-var switchButton = new Button(605, 315, 185, 75, 0, "", "", function() { console.log('info'); });
+var infoButton = new Button(605, 315, 185, 75, 0, "", "", function() {if (GUI != 6) { GUI = 6; } else { GUI = 0; } renderframe()});
 var popupLabel = new Label(10.5,5,"",27,"arial","center","red");
 var attackInfoText = [
     new Label(10.7, 2.3, "test", 12, "arial", "center", "black"),
@@ -42,7 +43,9 @@ var itemInfoText = [
     new Label(4.2, 3.1, "test", 12, "arial", "left", "black"),
     new Label(4.2, 4.3, "test", 12, "arial", "left", "black"),
     new Label(4.2, 5.3, "test", 12, "arial", "left", "black"),
-    new Button(318, 235, 150, 25, 100, "Confirm", "grey", function() { endTurn("item"); })
+    new Button(318, 235, 150, 25, 100, "Confirm", "grey", function() { endTurn("item"); }),
+    new spriteSheet("assets/spritesheets/items1.png",512,512,1,5)
+    
 ]
 var attackselbuttons = [
     new Button(230, 60, 370, 27, 100, "text", "grey", function() { if (GUI != 2) { GUI = 2; } else { GUI = 0; } selectedAttack = 0;
@@ -110,6 +113,9 @@ var itemselbuttons = [
     guibuttons();
     tick(); })
 ]
+var infoScreen = [
+  new Label(5,2,"info",10,"arial","left","black")
+  ]
 var fullscreenButton = new Button(730,1,70,50,80,"fullscreen","grey", function(){document.getElementById("main").requestFullscreen()})
 var selectedPMember = 0;
 var selectedAttack = 0;
@@ -158,6 +164,11 @@ function guibuttons()
     attackselbuttons[2].show();
     attackselbuttons[3].show();
     attackselbuttons[4].show();
+    attackIcons.drawSpriteCustomSize(5.55,2.35,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[0].type]);
+    attackIcons.drawSpriteCustomSize(5.55,3.25,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[1].type]);
+    attackIcons.drawSpriteCustomSize(5.55,4.15,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[2].type]);
+    attackIcons.drawSpriteCustomSize(5.55,5.05,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[3].type]);
+    attackIcons.drawSpriteCustomSize(5.55,5.95,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[4].type]);
   }
   if (GUI != 3)
   {
@@ -207,6 +218,7 @@ function guibuttons()
   {
     itemInfoText[4].show();
   }
+ 
 }
 
 function rendergui()
@@ -232,7 +244,12 @@ function rendergui()
     itemInfoText[1].drawLabel();
     itemInfoText[2].drawLabel();
     itemInfoText[3].drawLabel();
+    itemInfoText[5 + selecteditemcat].drawSpriteCustomSize(5,5.4,50,50,selecteditem + 1);
   }
+  if (GUI == 6)
+{
+  infoScreen[0].drawLabel();
+}
   guibuttons()
 }
 
@@ -247,7 +264,6 @@ function renderframe()
   EHealth.drawCell();
   PStamina.drawCell();
   PDurability.drawCell();
-  icons.drawSpriteCustomSize(5,5,50,50,3);
   rendergui();
   popupLabel.drawLabel();
 }
@@ -330,20 +346,23 @@ function Critical(damage)
   {
   if (RandomChance(10 + player.sEffects[sEffect].critBonus))
   {
-    alert("critical");
+    infoScreen[0].text += "You delt " + damage * 1.7 + " damage! (critical)";
     return damage * 1.7;
     
   }
   else{
+    infoScreen[0].text += "You delt " + damage + " damage!";
     return damage;
   }
   }
   else{
+    infoScreen[0].text += "You delt " + damage + " damage!";
     return damage;
   }
 }
 function endTurn(action)
 {
+  infoScreen[0].text = "";
   if (action == "attack")
   {
     GUI = 0;
@@ -356,8 +375,8 @@ function endTurn(action)
         player.party[selectedPMember].hp += player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthRecovery;
         if (player.party[selectedPMember].hp > player.party[selectedPMember].maxhp) { player.party[selectedPMember].hp = player.party[selectedPMember].maxhp }
         else if (player.party[selectedPMember].hp < 0) { player.party[selectedPMember].hp = 0 }
-        player.party[selectedPMember].stamina -= player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].staminaCost;
-        player.party[selectedPMember].stamina += player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].staminaRecovery;
+        player.party[selectedPMember].stamina -= player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].staminaCost / player.sEffects[sEffect].staminaBonus;
+        player.party[selectedPMember].stamina += player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].staminaRecovery ;
         if (player.party[selectedPMember].stamina > player.party[selectedPMember].maxStamina) { player.party[selectedPMember].stamina = player.party[selectedPMember].maxStamina }
         else if (player.party[selectedPMember].stamina < 0) { player.party[selectedPMember].stamina = 0 }
         player.weapons[player.party[selectedPMember].weapon].durability -= player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].durabilityCost;
@@ -367,7 +386,7 @@ function endTurn(action)
         enemy.types[currentEnemy].hp -= Critical(RandomInt(player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMin,player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMax));
       }
       else{
-        alert("missed");
+        infoScreen[0].text += "You missed!"
       }
     }
     sEffect = player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].sEffect;
@@ -389,6 +408,7 @@ function endTurn(action)
         else if (player.party[selectedPMember].hp < 0) { player.party[selectedPMember].hp = 0 }
         if (player.party[selectedPMember].stamina > player.party[selectedPMember].maxStamina) { player.party[selectedPMember].stamina = player.party[selectedPMember].maxStamina }
         else if (player.party[selectedPMember].stamina < 0) { player.party[selectedPMember].stamina = 0 }
+        sEffect = player.items[selecteditemcat][selecteditem].effects.sEffect;
     }
   }
   if (enemy.types[currentEnemy].hp < 0)
