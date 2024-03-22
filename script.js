@@ -16,11 +16,11 @@ var Background = new Cell(1, 1, "blue", true, "assets/images/background1.png", "
 var UI = new Cell(1, 1, "blue", true, "assets/images/ui.png", "cellEngine", 2, false, 1, 1);
 var attacksel = new Cell(1, 1, "blue", true, "assets/images/attackui.png", "cellEngine", 2, false, 1, 1);
 var descUI = new Cell(1, 1, "blue", true, "assets/images/descui.png", "cellEngine", 2, false, 1, 1);
-var PHealth = new Cell(20, 1, "red", false, "", "UI", 3, true, 15, 150);
+var PHealth = new Cell(20.05, 1.1, "red", false, "", "UI", 3, true, 15, 145);
 var EHealth = new Cell(1.15, 1, "red", false, "", "UI", 3, true, 15, 150);
 var emptyehbar = new Cell(1.15, 1, "black", false, "", "UI", 3, true, 15, 150);
 var PStamina = new Cell(1, 8.6, "yellow", false, "", "UI", 3, true, 400, 8)
-var emptyhbar = new Cell(20, 1, "black", false, "", "UI", 3, true, 15, 150)
+var emptyhbar = new Cell(20.05, 1.1, "black", false, "", "UI", 3, true, 15, 145)
 var PDurability = new Cell(5.2, 1, "blue", false, "", "UI", 3, true, 220, 8)
 var emptydbar = new Cell(5.2, 1, "black", false, "", "UI", 3, true, 220, 8)
 var attackButton = new Button(10, 315, 195, 75, 0, "", "", function() { if (GUI != 1) { GUI = 1; } else { GUI = 0; } renderframe();
@@ -255,7 +255,7 @@ function renderframe()
 function tick()
 {
 
-  PHealth.height = (player.party[selectedPMember].hp / player.party[selectedPMember].maxhp) * 150;
+  PHealth.height = (player.party[selectedPMember].hp / player.party[selectedPMember].maxhp) * 145;
   EHealth.height = (enemy.types[currentEnemy].hp / enemy.types[currentEnemy].maxhp) * 150;
   PStamina.width = (player.party[selectedPMember].stamina / player.party[selectedPMember].maxStamina) * 400;
   PDurability.width = (player.weapons[player.party[selectedPMember].weapon].durability / player.weapons[player.party[selectedPMember].weapon].maxDurability) * 220;
