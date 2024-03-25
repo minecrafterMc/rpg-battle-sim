@@ -1,184 +1,234 @@
 {
+  "dungeon": {
+    "items": [
+      {
+        "name": "healing potion",
+        "desc": "a basic healing potion",
+        "usableBy": -1,
+        "mostEffective": 3,
+        "texture": 1,
+        "effects": {
+          "heal": 10,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+          },
+      {
+        "name": "big healing potion",
+        "desc": "a big healing potion",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 2,
+        "effects": {
+          "heal": 20,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+},
+      {
+        "name": "stamina potion",
+        "desc": "a basic stamina recovery potion",
+        "usableBy": -1,
+        "mostEffective": 3,
+        "amount": 2,
+        "texture": 3,
+        "effects": {
+          "heal": 0,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 30,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+            },
+      {
+        "name": "calming potion",
+        "desc": "a potion that makes you more focused",
+        "usableBy": -1,
+        "mostEffective": 6,
+        "amount": 3,
+        "texture": 4,
+        "effects": {
+          "heal": 0,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 1
+        }
+            },
+      {
+        "name": "spike ball",
+        "desc": "A spike ball to throw",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 5,
+        "effects": {
+          "heal": 0,
+          "damage": 20,
+          "selfDamage": 10,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+      },
+      {
+        "name": "the scroll of blood",
+        "desc": "a spell that hurts both the user and the enemy",
+        "usableBy": 3,
+        "mostEffective": -1,
+        "amount": 2,
+        "texture": 6,
+        "effects": {
+          "heal": 0,
+          "damage": 20,
+          "selfDamage": 10,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+          },
+      {
+        "name": "magic target",
+        "desc": "a magic item that guarantees your next hit",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "amount": 2,
+        "texture": 7,
+        "effects": {
+          "heal": 0,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 2
+        }
+            },
+      {
+        "name": "absorb scroll",
+        "desc": "a scroll containing the absorb spell",
+        "usableBy": -1,
+        "mostEffective": 3,
+        "amount": 5,
+        "texture": 8,
+        "effects": {
+          "heal": 15,
+          "damage": 30,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+            },
+      {
+        "name": "the spell of obliteration",
+        "desc": "a spell that kills everything",
+        "usableBy": 7,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 9,
+        "effects": {
+          "heal": 0,
+          "damage": 99999,
+          "selfDamage": 100,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+
+      },
+      {
+        "name": "the rune of restoration",
+        "desc": "this rune fully heals the user but also confuses them",
+        "usableBy": 3,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 10,
+        "effects": {
+          "heal": 99999,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 3
+        }
+      }
+]
+  },
   "player": {
     "items": [
       [
         {
-          "name": "healing potion",
-          "desc": "a basic healing potion",
-          "usableBy": -1,
-          "mostEffective": 3,
-          "amount": 3,
-          "iconSheet": "assets/spritesheets/micsitems.png",
-          "icon": 1,
-          "effects": {
-            "heal": 10,
-            "damage": 0,
-            "selfDamage": 0,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
-          },
-        {
-          "name": "big healing potion",
-          "desc": "a big healing potion",
-          "usableBy": -1,
-          "mostEffective": -1,
-          "amount": 1,
-          "effects": {
-            "heal": 20,
-            "damage": 0,
-            "selfDamage": 0,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
+          "id": 0,
+          "amount": 3
 },
         {
-          "name": "stamina potion",
-          "desc": "a basic stamina recovery potion",
-          "usableBy": -1,
-          "mostEffective": 3,
-          "amount": 2,
-          "effects": {
-            "heal": 0,
-            "damage": 0,
-            "selfDamage": 0,
-            "staminaRecovery": 10,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
-            },
+          "id": 1,
+          "amount": 3
+},
         {
-          "name": "calming potion",
-          "desc": "a potion that makes you more focused",
-          "usableBy": -1,
-          "mostEffective": 6,
-          "amount": 3,
-          "effects": {
-            "heal": 0,
-            "damage": 0,
-            "selfDamage": 0,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 1
-          }
-            },
+          "id": 2,
+          "amount": 3
+},
         {
-          "name": "spike ball",
-          "desc": "A spike ball to throw",
-          "usableBy": -1,
-          "mostEffective": -1,
-          "amount": 1,
-          "effects": {
-            "heal": 0,
-            "damage": 20,
-            "selfDamage": 10,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
-
-      }
-        ],
-        [
+          "id": 3,
+          "amount": 3
+},
         {
-          "name": "the scroll of blood",
-          "desc": "a scroll containing a powerfull spell",
-          "usableBy": 3,
-          "mostEffective": -1,
-          "amount": 2,
-          "effects": {
-            "heal": 0,
-            "damage": 20,
-            "selfDamage": 10,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
-          },
+          "id": 4,
+          "amount": 3
+}
+      ],
+      [
         {
-          "name": "",
-          "desc": "a basic stamina recovery potion",
-          "usableBy": -1,
-          "mostEffective": 3,
-          "amount": 2,
-          "effects": {
-            "heal": 0,
-            "damage": 0,
-            "selfDamage": 0,
-            "staminaRecovery": 10,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
-            },
+          "id": 5,
+          "amount": 3
+},
         {
-          "name": "rock",
-          "desc": "its just a rock",
-          "usableBy": -1,
-          "mostEffective": 6,
-          "amount": 5,
-          "effects": {
-            "heal": 0,
-            "damage": 10,
-            "selfDamage": 0,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
-            },
+          "id": 6,
+          "amount": 3
+},
         {
-          "name": "spike ball",
-          "desc": "A spike ball to throw",
-          "usableBy": -1,
-          "mostEffective": -1,
-          "amount": 1,
-          "effects": {
-            "heal": 0,
-            "damage": 20,
-            "selfDamage": 10,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
-
-      },
+          "id": 7,
+          "amount": 3
+},
         {
-          "name": "big healing potion",
-          "desc": "a big healing potion",
-          "usableBy": -1,
-          "mostEffective": -1,
-          "amount": 1,
-          "effects": {
-            "heal": 20,
-            "damage": 0,
-            "selfDamage": 0,
-            "staminaRecovery": 0,
-            "staminaCost": 0,
-            "weaponDurabilityRecovery": 0,
-            "weaponSwitch": -1,
-            "sEffect": 0
-          }
-      }
-      ]
+          "id": 8,
+          "amount": 3
+},
+        {
+          "id": 9,
+          "amount": 3
+}
+        ]
         ],
     "itemTypes": [
       {
@@ -245,6 +295,13 @@
         "rangeMulti": 0.5,
         "physicalMulti": 1.5,
         "magicMulti": 0.5,
+        "recoveryMulti": 2
+      },
+      {
+        "name": "master wizard",
+        "rangeMulti": 0.1,
+        "physicalMulti": 0.1,
+        "magicMulti": 3,
         "recoveryMulti": 2
       }
     ],
@@ -454,7 +511,23 @@
         "attackBonus": 5,
         "staminaBonus": 1
 
-      }
+      },
+      {
+        "name": "hyper accurate",
+        "desc": "",
+        "critBonus": 0,
+        "accuracyBonus": 100,
+        "attackBonus": 0,
+        "staminaBonus": 1
+      },
+      {
+        "name": "Overwhelmed",
+        "desc": "",
+        "critBonus": 0,
+        "accuracyBonus": -30,
+        "attackBonus": 0,
+        "staminaBonus": 1
+}
       ]
   },
   "enemy": {

@@ -31,6 +31,7 @@ var itemButton = new Button(215, 315, 165, 75, 0, "", "", function() { if (GUI !
 var switchButton = new Button(390, 315, 205, 75, 0, "", "", function() { console.log('switch'); });
 var infoButton = new Button(605, 315, 185, 75, 0, "", "", function() {if (GUI != 6) { GUI = 6; } else { GUI = 0; } renderframe()});
 var popupLabel = new Label(10.5,5,"",27,"arial","center","red");
+var itemIcons = new spriteSheet("assets/spritesheets/items.png",512,512,1,10)
 var attackInfoText = [
     new Label(10.7, 2.3, "test", 12, "arial", "center", "black"),
     new Label(4.2, 3.1, "test", 12, "arial", "left", "black"),
@@ -40,11 +41,11 @@ var attackInfoText = [
 ]
 var itemInfoText = [
     new Label(10.7, 2.3, "test", 12, "arial", "center", "black"),
-    new Label(4.2, 3.1, "test", 12, "arial", "left", "black"),
+    new Label(4.2, 3.3, "test", 12, "arial", "left", "black"),
     new Label(4.2, 4.3, "test", 12, "arial", "left", "black"),
     new Label(4.2, 5.3, "test", 12, "arial", "left", "black"),
     new Button(318, 235, 150, 25, 100, "Confirm", "grey", function() { endTurn("item"); }),
-    new spriteSheet("assets/spritesheets/items1.png",512,512,1,5)
+    
     
 ]
 var attackselbuttons = [
@@ -114,7 +115,8 @@ var itemselbuttons = [
     tick(); })
 ]
 var infoScreen = [
-  new Label(5,2,"info",10,"arial","left","black")
+  new Label(11,2.5,"info",11,"arial","center","black"),
+  new Label(11,3.5,"info2",11,"arial","center","black")
   ]
 var fullscreenButton = new Button(730,1,70,50,80,"fullscreen","grey", function(){document.getElementById("main").requestFullscreen()})
 var selectedPMember = 0;
@@ -125,12 +127,14 @@ var currentEnemy = 0;
 var player;
 var enemy;
 var database;
+var dungeon;
 var sEffect = 0;
 function setvar(data)
 {
   database = data;
   player = data.player;
   enemy = data.enemy;
+  dungeon = data.dungeon
 }
 fetch("./database.json")
   .then((res) => {
@@ -244,11 +248,12 @@ function rendergui()
     itemInfoText[1].drawLabel();
     itemInfoText[2].drawLabel();
     itemInfoText[3].drawLabel();
-    itemInfoText[5 + selecteditemcat].drawSpriteCustomSize(5,5.4,50,50,selecteditem + 1);
+    itemIcons.drawSpriteCustomSize(5,5.4,50,50,player.items[selecteditemcat][selecteditem].texture);
   }
   if (GUI == 6)
 {
   infoScreen[0].drawLabel();
+  infoScreen[1].drawLabel();
 }
   guibuttons()
 }
@@ -285,11 +290,11 @@ function tick()
   itemcatselbuttons[2].buttonElement.innerHTML = player.itemTypes[2].name;
   itemcatselbuttons[3].buttonElement.innerHTML = player.itemTypes[3].name;
   itemcatselbuttons[4].buttonElement.innerHTML = player.itemTypes[4].name;
-  itemselbuttons[0].buttonElement.innerHTML = player.items[selecteditemcat][0].name + " x" + player.items[selecteditemcat][0].amount;
-  itemselbuttons[1].buttonElement.innerHTML = player.items[selecteditemcat][1].name+ " x" + player.items[selecteditemcat][1].amount;
-  itemselbuttons[2].buttonElement.innerHTML = player.items[selecteditemcat][2].name+ " x" + player.items[selecteditemcat][2].amount;
-  itemselbuttons[3].buttonElement.innerHTML = player.items[selecteditemcat][3].name+ " x" + player.items[selecteditemcat][3].amount;
-  itemselbuttons[4].buttonElement.innerHTML = player.items[selecteditemcat][4].name+ " x" + player.items[selecteditemcat][4].amount;
+  itemselbuttons[0].buttonElement.innerHTML = dungeon.items[player.items[selecteditemcat][0].id].name + " x" + player.items[selecteditemcat][0].amount;
+  itemselbuttons[1].buttonElement.innerHTML = dungeon.items[player.items[selecteditemcat][1].id].name+ " x" + player.items[selecteditemcat][1].amount;
+  itemselbuttons[2].buttonElement.innerHTML = dungeon.items[player.items[selecteditemcat][2].id].name+ " x" + player.items[selecteditemcat][2].amount;
+  itemselbuttons[3].buttonElement.innerHTML = dungeon.items[player.items[selecteditemcat][3].id].name+ " x" + player.items[selecteditemcat][3].amount;
+  itemselbuttons[4].buttonElement.innerHTML = dungeon.items[player.items[selecteditemcat][4].id].name+ " x" + player.items[selecteditemcat][4].amount;
   attackInfoText[0].text = player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].name;
   attackInfoText[1].text = player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].desc;
   attackInfoText[2].text = "type: " + player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].type + "; Damage: " + player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMin + "-" + player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMax + "; Accuracy: " + player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].accuracy + ";";
@@ -300,22 +305,22 @@ function tick()
   itemInfoText[1].text = player.items[selecteditemcat][selecteditem].desc;
   let itemcompatibilitytext;
   let itemeffectivnesstext;
-  if (player.items[selecteditemcat][selecteditem].usableBy == -1)
+  if (dungeon.items[player.items[selecteditemcat][selecteditem].id].usableBy == -1)
   {
     itemcompatibilitytext = "everyone";
   }
   else {
-    itemcompatibilitytext = player.classes[player.items[selecteditemcat][selecteditem].usableBy].name;
+    itemcompatibilitytext = player.classes[dungeon.items[player.items[selecteditemcat][selecteditem].id].usableBy].name;
   }
   if (player.items[selecteditemcat][selecteditem].mostEffective == -1)
   {
     itemeffectivnesstext = "none";
   }
   else {
-    itemeffectivnesstext = player.classes[player.items[selecteditemcat][selecteditem].mostEffective].name;
+    itemeffectivnesstext = player.classes[dungeon.items[player.items[selecteditemcat][selecteditem].id].mostEffective].name;
   }
   itemInfoText[2].text = "usable by: " + itemcompatibilitytext + "; most effective by: " + itemeffectivnesstext + ";";
-  itemInfoText[3].text = "Health: " + (player.items[selecteditemcat][selecteditem].effects.heal - player.items[selecteditemcat][selecteditem].effects.selfDamage) + "; stamina: " + (player.items[selecteditemcat][selecteditem].effects.staminaRecovery - player.items[selecteditemcat][selecteditem].effects.staminaCost) + "; Durability: " + player.items[selecteditemcat][selecteditem].effects.weaponDurabilityRecovery + "; Damage:" + player.items[selecteditemcat][selecteditem].effects.damage;
+  itemInfoText[3].text = "Health: " + (dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.heal - dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.selfDamage) + "; stamina: " + (dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.staminaRecovery - dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.staminaCost) + "; Durability: " + dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.weaponDurabilityRecovery + "; Damage:" + dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.damage;
   renderframe();
   guibuttons();
 }
@@ -340,50 +345,78 @@ function RandomChance(percent)
   }
 }
 
-function Critical(damage)
+function Critical(damage,attackType)
 {
+  let damageMulti = 0;
+  switch (attackType) {
+    case 'physical':
+      damageMulti += player.classes[player.party[selectedPMember].class].physicalMulti;
+      break;
+    case 'ranged':
+damageMulti += player.classes[player.party[selectedPMember].class].rangeMulti;
+break;
+case 'magic':
+damageMulti += player.classes[player.party[selectedPMember].class].magicMulti;
+break;
+    default:
+      damageMulti = 1;
+  }
   if ( player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].type != "recovery")
   {
   if (RandomChance(10 + player.sEffects[sEffect].critBonus))
   {
-    infoScreen[0].text += "You delt " + damage * 1.7 + " damage! (critical)";
-    return damage * 1.7;
+    damageMulti += 0.7;
+    infoScreen[1].text += " You delt " + damage * damageMulti + " damage! (critical)";
+    return damage * damageMulti;
     
   }
   else{
-    infoScreen[0].text += "You delt " + damage + " damage!";
-    return damage;
+    infoScreen[1].text += " You delt " + damage * damageMulti + " damage!";
+    return damage * damageMulti;
   }
   }
   else{
-    infoScreen[0].text += "You delt " + damage + " damage!";
-    return damage;
+    infoScreen[1].text += " You delt " + damage * damageMulti + " damage!";
+    return damage * damageMulti;
   }
 }
 function endTurn(action)
 {
+  let endTurn = true;
   infoScreen[0].text = "";
+  infoScreen[1].text = "";
   if (action == "attack")
   {
-    GUI = 0;
+    GUI = 6;
     if (player.party[selectedPMember].stamina > 0 && player.weapons[player.party[selectedPMember].weapon].durability > 0 || player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].type == "recovery")
     {
       if (RandomInt(1,100) < player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].accuracy + player.sEffects[sEffect].accuracyBonus)
       {
         player.weapons[player.party[selectedPMember].weapon].durability
         player.party[selectedPMember].hp -= player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthCost;
+        if (player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].type != "recovery")
+        {
         player.party[selectedPMember].hp += player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthRecovery;
+        infoScreen[0].text += "your hp changed by: " + (player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthCost + player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthRecovery);
+        }
+        else{
+          player.party[selectedPMember].hp += player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthRecovery * player.classes[player.party[selectedPMember].class].recoveryMulti;
+          infoScreen[0].text += "your hp changed by: " + (player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthCost + (player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].healthRecovery * player.classes[player.party[selectedPMember].class].recoveryMulti));
+        }
+        
         if (player.party[selectedPMember].hp > player.party[selectedPMember].maxhp) { player.party[selectedPMember].hp = player.party[selectedPMember].maxhp }
         else if (player.party[selectedPMember].hp < 0) { player.party[selectedPMember].hp = 0 }
         player.party[selectedPMember].stamina -= player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].staminaCost / player.sEffects[sEffect].staminaBonus;
         player.party[selectedPMember].stamina += player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].staminaRecovery ;
+        infoScreen[0].text += ", your stamina changed by: " + (player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].staminaCost / player.sEffects[sEffect].staminaBonus + player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].staminaRecovery);
         if (player.party[selectedPMember].stamina > player.party[selectedPMember].maxStamina) { player.party[selectedPMember].stamina = player.party[selectedPMember].maxStamina }
         else if (player.party[selectedPMember].stamina < 0) { player.party[selectedPMember].stamina = 0 }
         player.weapons[player.party[selectedPMember].weapon].durability -= player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].durabilityCost;
         player.weapons[player.party[selectedPMember].weapon].durability += player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].durabilityRecovery;
+        infoScreen[1].text += "Your weapon's durablilty changed by: " + (player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].durabilityCost + player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].durabilityRecovery);
         if (player.weapons[player.party[selectedPMember].weapon].durability > player.weapons[player.party[selectedPMember].weapon].maxDurability) { player.weapons[player.party[selectedPMember].weapon].durability = player.weapons[player.party[selectedPMember].weapon].maxDurability }
         else if (player.weapons[player.party[selectedPMember].weapon].durability < 0) { player.weapons[player.party[selectedPMember].weapon].durability = 0 }
-        enemy.types[currentEnemy].hp -= Critical(RandomInt(player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMin,player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMax));
+        enemy.types[currentEnemy].hp -= Critical(RandomInt(player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMin,player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].damageMax),player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].type);
       }
       else{
         infoScreen[0].text += "You missed!"
@@ -393,13 +426,18 @@ function endTurn(action)
   }
   else if (action == "item")
   {
-    GUI = 0;
+    GUI = 6;
     if (player.items[selecteditemcat][selecteditem].amount != 0)
+    {
+    if (player.party[selectedPMember].class == player.items[selecteditemcat][selecteditem].usableBy || -1 == player.items[selecteditemcat][selecteditem].usableBy)
     {
       player.items[selecteditemcat][selecteditem].amount -= 1;
       player.party[selectedPMember].hp += (player.items[selecteditemcat][selecteditem].effects.heal - player.items[selecteditemcat][selecteditem].effects.selfDamage);
+        infoScreen[0].text += "Your hp changed by: " + (player.items[selecteditemcat][selecteditem].effects.heal - player.items[selecteditemcat][selecteditem].effects.selfDamage);
       player.party[selectedPMember].stamina += (player.items[selecteditemcat][selecteditem].effects.staminaRecovery - player.items[selecteditemcat][selecteditem].effects.staminaCost);
       enemy.types[currentEnemy].hp -= player.items[selecteditemcat][selecteditem].effects.damage;
+      infoScreen[0].text += " Your stamina changed by: " + (player.items[selecteditemcat][selecteditem].effects.staminaRecovery - player.items[selecteditemcat][selecteditem].effects.staminaCost);
+      infoScreen[1].text += " You delt " + player.items[selecteditemcat][selecteditem].effects.damage + " damage";
       if(player.items[selecteditemcat][selecteditem].effects.weaponSwitch != -1)
       {
         player.party[selectedPMember].weapon = player.items[selecteditemcat][selecteditem].effects.weaponSwitch;
@@ -410,6 +448,11 @@ function endTurn(action)
         else if (player.party[selectedPMember].stamina < 0) { player.party[selectedPMember].stamina = 0 }
         sEffect = player.items[selecteditemcat][selecteditem].effects.sEffect;
     }
+    else{
+      endTurn = false;
+      infoScreen[0].text += "this class can't use this item";
+    }
+  }
   }
   if (enemy.types[currentEnemy].hp < 0)
   {
@@ -418,7 +461,10 @@ function endTurn(action)
     
   }
   else{
+    if (endTurn)
+    {
   enemyTurn();
+    }
   }
 }
 function enemyTurn()
