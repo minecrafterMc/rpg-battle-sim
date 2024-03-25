@@ -1,0 +1,571 @@
+{
+  "dungeon": {
+    "items": [
+      {
+        "name": "healing potion",
+        "desc": "a basic healing potion",
+        "usableBy": -1,
+        "mostEffective": 3,
+        "texture": 1,
+        "effects": {
+          "heal": 10,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+          },
+      {
+        "name": "big healing potion",
+        "desc": "a big healing potion",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 2,
+        "effects": {
+          "heal": 20,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+},
+      {
+        "name": "stamina potion",
+        "desc": "a basic stamina recovery potion",
+        "usableBy": -1,
+        "mostEffective": 3,
+        "amount": 2,
+        "texture": 3,
+        "effects": {
+          "heal": 0,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 30,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+            },
+      {
+        "name": "calming potion",
+        "desc": "a potion that makes you more focused",
+        "usableBy": -1,
+        "mostEffective": 6,
+        "amount": 3,
+        "texture": 4,
+        "effects": {
+          "heal": 0,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 1
+        }
+            },
+      {
+        "name": "spike ball",
+        "desc": "A spike ball to throw",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 5,
+        "effects": {
+          "heal": 0,
+          "damage": 20,
+          "selfDamage": 10,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+      },
+      {
+        "name": "the scroll of blood",
+        "desc": "a spell that hurts both the user and the enemy",
+        "usableBy": 3,
+        "mostEffective": -1,
+        "amount": 2,
+        "texture": 6,
+        "effects": {
+          "heal": 0,
+          "damage": 20,
+          "selfDamage": 10,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+          },
+      {
+        "name": "magic target",
+        "desc": "a magic item that guarantees your next hit",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "amount": 2,
+        "texture": 7,
+        "effects": {
+          "heal": 0,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 2
+        }
+            },
+      {
+        "name": "absorb scroll",
+        "desc": "a scroll containing the absorb spell",
+        "usableBy": -1,
+        "mostEffective": 3,
+        "amount": 5,
+        "texture": 8,
+        "effects": {
+          "heal": 15,
+          "damage": 30,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+            },
+      {
+        "name": "the spell of obliteration",
+        "desc": "a spell that kills everything",
+        "usableBy": 7,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 9,
+        "effects": {
+          "heal": 0,
+          "damage": 99999,
+          "selfDamage": 100,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
+
+      },
+      {
+        "name": "the rune of restoration",
+        "desc": "this rune fully heals the user but also confuses them",
+        "usableBy": 3,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 10,
+        "effects": {
+          "heal": 99999,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 3
+        }
+      }
+]
+  },
+  "player": {
+    "items": [
+      [
+        {
+          "id": 0,
+          "amount": 3
+},
+        {
+          "id": 1,
+          "amount": 3
+},
+        {
+          "id": 2,
+          "amount": 3
+},
+        {
+          "id": 3,
+          "amount": 3
+},
+        {
+          "id": 4,
+          "amount": 3
+}
+      ],
+      [
+        {
+          "id": 5,
+          "amount": 3
+},
+        {
+          "id": 6,
+          "amount": 3
+},
+        {
+          "id": 7,
+          "amount": 3
+},
+        {
+          "id": 8,
+          "amount": 3
+},
+        {
+          "id": 9,
+          "amount": 3
+}
+        ]
+        ],
+    "itemTypes": [
+      {
+        "name": "misc"
+      },
+      {
+        "name": "magic"
+      },
+      {
+        "name": "arrows"
+      },
+      {
+        "name": "materials"
+      },
+      {
+        "name": "weapons"
+      }
+      ],
+    "classes": [
+      {
+        "name": "basic",
+        "rangeMulti": 1,
+        "physicalMulti": 1,
+        "magicMulti": 1,
+        "recoveryMulti": 1
+      },
+      {
+        "name": "swordfighter",
+        "rangeMulti": 0.5,
+        "physicalMulti": 1.5,
+        "magicMulti": 1,
+        "recoveryMulti": 1
+      },
+      {
+        "name": "archer",
+        "rangeMulti": 1.5,
+        "physicalMulti": 0.5,
+        "magicMulti": 1,
+        "recoveryMulti": 1
+      },
+      {
+        "name": "mage",
+        "rangeMulti": 0.5,
+        "physicalMulti": 0.5,
+        "magicMulti": 2,
+        "recoveryMulti": 1
+      },
+      {
+        "name": "swordmaster",
+        "rangeMulti": 0.5,
+        "physicalMulti": 2,
+        "magicMulti": 0.5,
+        "recoveryMulti": 1
+      },
+      {
+        "name": "bowmaster",
+        "rangeMulti": 2,
+        "physicalMulti": 0.5,
+        "magicMulti": 0.5,
+        "recoveryMulti": 1
+      },
+      {
+        "name": "tank",
+        "rangeMulti": 0.5,
+        "physicalMulti": 1.5,
+        "magicMulti": 0.5,
+        "recoveryMulti": 2
+      },
+      {
+        "name": "master wizard",
+        "rangeMulti": 0.1,
+        "physicalMulti": 0.1,
+        "magicMulti": 3,
+        "recoveryMulti": 2
+      }
+    ],
+    "attackTypes": {
+      "recovery": 1,
+      "physical": 2,
+      "ranged": 3,
+      "magic": 4
+    },
+    "party": [
+      {
+        "name": "fredric",
+        "class": 1,
+        "hp": 50,
+        "maxhp": 50,
+        "stamina": 50,
+        "maxStamina": 50,
+        "level": 1,
+        "weapon": 1
+        }
+    ],
+    "weapons": [
+      {
+        "name": "fists",
+        "desc": "just your fists. not the best weapon",
+        "type": "fists",
+        "durability": 1,
+        "maxDurability": 1,
+        "attacks": [
+          {
+            "name": "punch",
+            "desc": "punch your enemy with your fist",
+            "type": "physical",
+            "damageMin": 2,
+            "damageMax": 4,
+            "staminaCost": 10,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 0,
+            "durabilityRecovery": 0,
+            "accuracy": 100,
+            "sEffect": 0
+                      },
+          {
+            "name": "throw a stone",
+            "desc": "you throw a stone at your enemy",
+            "type": "ranged",
+            "damageMin": 1,
+            "damageMax": 8,
+            "staminaCost": 5,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 0,
+            "durabilityRecovery": 0,
+            "accuracy": 60,
+            "sEffect": 0
+                      },
+          {
+            "name": "full sprint charge",
+            "desc": "you run into the enemy with your full speed",
+            "type": "physical",
+            "damageMin": 10,
+            "damageMax": 15,
+            "staminaCost": 15,
+            "staminaRecovery": 0,
+            "healthCost": 5,
+            "healthRecovery": 0,
+            "durabilityCost": 0,
+            "durabilityRecovery": 0,
+            "accuracy": 80,
+            "sEffect": 0
+                      },
+          {
+            "name": "rest",
+            "desc": "you rest and recover hp and stamina",
+            "type": "recovery",
+            "damageMin": 0,
+            "damageMax": 0,
+            "staminaCost": 0,
+            "staminaRecovery": 10,
+            "healthCost": 0,
+            "healthRecovery": 10,
+            "durabilityCost": 0,
+            "durabilityRecovery": 0,
+            "accuracy": 100,
+            "sEffect": 0
+                      },
+          {
+            "name": "meditate",
+            "desc": "you meditate, recovering your strength",
+            "type": "recovery",
+            "damageMin": 0,
+            "damageMax": 0,
+            "staminaCost": 0,
+            "staminaRecovery": 20,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 0,
+            "durabilityRecovery": 0,
+            "accuracy": 100,
+            "sEffect": 0
+                      }
+                  ]
+      },
+      {
+        "name": "basic sword",
+        "desc": "a very basic sword",
+        "type": "sword",
+        "durability": 5,
+        "maxDurability": 5,
+        "attacks": [
+          {
+            "name": "swing",
+            "desc": "swing your sword at the enemy",
+            "type": "physical",
+            "damageMin": 5,
+            "damageMax": 10,
+            "staminaCost": 0,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 1,
+            "durabilityRecovery": 0,
+            "accuracy": 100,
+            "sEffect": 0
+                },
+          {
+            "name": "spin",
+            "desc": "spin with your sword",
+            "type": "physical",
+            "damageMin": 10,
+            "damageMax": 25,
+            "staminaCost": 5,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 2,
+            "durabilityRecovery": 0,
+            "accuracy": 70,
+            "sEffect": 0
+                },
+          {
+            "name": "throw sword",
+            "desc": "you throw your sword at the enemy",
+            "type": "ranged",
+            "damageMin": 20,
+            "damageMax": 25,
+            "staminaCost": 5,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 5,
+            "durabilityRecovery": 0,
+            "accuracy": 50,
+            "sEffect": 0
+                },
+          {
+            "name": "rest",
+            "desc": "you rest and recover hp and stamina",
+            "type": "recovery",
+            "damageMin": 0,
+            "damageMax": 0,
+            "staminaCost": 0,
+            "staminaRecovery": 10,
+            "healthCost": 0,
+            "healthRecovery": 10,
+            "durabilityCost": 0,
+            "durabilityRecovery": 0,
+            "accuracy": 100,
+            "sEffect": 0
+                },
+          {
+            "name": "repair blade",
+            "desc": "you try to repair your sword mid-battle",
+            "type": "recovery",
+            "damageMin": 0,
+            "damageMax": 0,
+            "staminaCost": 10,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 0,
+            "durabilityRecovery": 5,
+            "accuracy": 90,
+            "sEffect": 0
+                }
+            ]
+        }
+    ],
+    "sEffects": [
+      {
+        "name": "",
+        "desc": "",
+        "critBonus": 0,
+        "accuracyBonus": 0,
+        "attackBonus": 0,
+        "staminaBonus": 1
+
+      },
+      {
+        "name": "focus",
+        "desc": "",
+        "critBonus": 30,
+        "accuracyBonus": 30,
+        "attackBonus": 5,
+        "staminaBonus": 1
+
+      },
+      {
+        "name": "hyper accurate",
+        "desc": "",
+        "critBonus": 0,
+        "accuracyBonus": 100,
+        "attackBonus": 0,
+        "staminaBonus": 1
+      },
+      {
+        "name": "Overwhelmed",
+        "desc": "",
+        "critBonus": 0,
+        "accuracyBonus": -30,
+        "attackBonus": 0,
+        "staminaBonus": 1
+}
+      ]
+  },
+  "enemy": {
+    "types": [
+      {
+        "name": "goblin",
+        "hp": 50,
+        "maxhp": 50,
+        "attacks": [
+          {
+            "name": "steal",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 10,
+            "special": "steal"
+          },
+          {
+            "name": "stab",
+            "damageMin": 1,
+            "damageMax": 5,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 100,
+            "special": "none"
+          },
+          {
+            "name": "rest",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 3,
+            "accuracy": 70,
+            "special": "none"
+          }
+          ]
+      }
+      ]
+  }
+}
