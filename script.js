@@ -150,7 +150,7 @@ fetch("./database.json")
     console.error("Unable to fetch data:", error));
 
 
-var GUI = 1;
+var GUI = 0;
 
 function guibuttons()
 {
