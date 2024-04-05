@@ -19,6 +19,8 @@ function resolveAfter2Seconds(ms) {
   await resolveAfter2Seconds(200);
   document.head.appendChild(classes);
   await resolveAfter2Seconds(200);
+  
   document.head.appendChild(script);
+  
   }
   importing();
