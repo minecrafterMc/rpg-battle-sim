@@ -6,24 +6,28 @@ ctx.imageSmoothingEnabled = false;
 ctx.mozImageSmoothingEnabled = false;
 ctx.webkitImageSmoothingEnabled = false;
 const CanvasHeight = 2 * OutlineSize + (Rows - 1) * BorderSize + Rows * CellHeight;
+
+
+
 const CanvasWidth = 2 * OutlineSize + (Columns - 1) * BorderSize + Columns * CellWidth;
+
 const SpacesOnGrid = Rows * Columns;
 document.getElementById("canvas").width = CanvasWidth;
 document.getElementById("canvas").height = CanvasHeight;
 var Board = [];
 var weaponIcons = new spriteSheet("assets/spritesheets/smallicons.png",14,16,1,3);
 var attackIcons = new spriteSheet("assets/spritesheets/attackIcons.png",240,240,1,4);
-var Background = new Cell(1, 1, "blue", true, "assets/images/background1.png", "cellEngine", 1, false, 1, 1);
-var UI = new Cell(1, 1, "blue", true, "assets/images/ui.png", "cellEngine", 2, false, 1, 1);
-var attacksel = new Cell(1, 1, "blue", true, "assets/images/attackui.png", "cellEngine", 2, false, 1, 1);
-var descUI = new Cell(1, 1, "blue", true, "assets/images/descui.png", "cellEngine", 2, false, 1, 1);
-var PHealth = new Cell(20.05, 1.1, "red", false, "", "UI", 3, true, 15, 145);
-var EHealth = new Cell(1.15, 1, "red", false, "", "UI", 3, true, 15, 150);
-var emptyehbar = new Cell(1.15, 1, "black", false, "", "UI", 3, true, 15, 150);
-var PStamina = new Cell(1, 8.6, "yellow", false, "", "UI", 3, true, 400, 8)
-var emptyhbar = new Cell(20.05, 1.1, "black", false, "", "UI", 3, true, 15, 145)
-var PDurability = new Cell(5.2, 1, "blue", false, "", "UI", 3, true, 220, 8)
-var emptydbar = new Cell(5.2, 1, "black", false, "", "UI", 3, true, 220, 8)
+var Background = new Cell(1, 1, "blue", true, "assets/images/background1.png", "cellEngine", 1, true, 800, 400);
+var UI = new Cell(1, 1, "blue", true, "assets/images/ui.png", "cellEngine", 2, true, 800, 400);
+var attacksel = new Cell(1, 1, "blue", true, "assets/images/attackui.png", "cellEngine", 2, true, 800, 400);
+var descUI = new Cell(1, 1, "blue", true, "assets/images/descui.png", "cellEngine", 2, true, 800, 400);
+var PHealth = new Cell(39, 1.2, "red", false, "", "UI", 3, true, 30, 145);
+var EHealth = new Cell(1.3, 1.05, "red", false, "", "UI", 3, true, 30, 150);
+var emptyehbar = new Cell(1.3, 1.05, "black", false, "", "UI", 3, true, 30, 300);
+var PStamina = new Cell(1, 16.16, "yellow", false, "", "UI", 3, true, 800, 16)
+var emptyhbar = new Cell(39, 1.2, "black", false, "", "UI", 3, true, 30, 290)
+var PDurability = new Cell(10.4, 1.3, "blue", false, "", "UI", 3, true, 440, 16)
+var emptydbar = new Cell(10.4,1.3, "black", false, "", "UI", 3, true, 440, 16)
 var attackButton = new Button(10, 315, 195, 75, 0, "", "", function() { if (GUI != 1) { GUI = 1; } else { GUI = 0; } renderframe();
   guibuttons(); });
 var itemButton = new Button(215, 315, 165, 75, 0, "", "", function() { if (GUI != 3) { GUI = 3; } else { GUI = 0; } renderframe();
@@ -33,17 +37,17 @@ var infoButton = new Button(605, 315, 185, 75, 0, "", "", function() {if (GUI !=
 var popupLabel = new Label(10.5,5,"",27,"arial","center","red");
 var itemIcons = new spriteSheet("assets/spritesheets/items.png",512,512,1,12)
 var attackInfoText = [
-    new Label(10.7, 2.3, "test", 12, "arial", "center", "black"),
-    new Label(4.2, 3.1, "test", 12, "arial", "left", "black"),
-    new Label(4.2, 4.3, "test", 12, "arial", "left", "black"),
-    new Label(4.2, 5.3, "test", 12, "arial", "left", "black"),
+    new Label(21, 3.6, "test", 28, "arial", "center", "black"),
+    new Label(7.4, 5.2, "test", 21, "arial", "left", "black"),
+    new Label(7.4, 6.6, "test", 21, "arial", "left", "black"),
+    new Label(7.4, 8, "test", 21, "arial", "left", "black"),
     new Button(318, 235, 150, 25, 100, "Confirm", "grey", function() { endTurn("attack"); })
 ]
 var itemInfoText = [
-    new Label(10.7, 2.3, "test", 12, "arial", "center", "black"),
-    new Label(4.2, 3.3, "test", 12, "arial", "left", "black"),
-    new Label(4.2, 4.3, "test", 12, "arial", "left", "black"),
-    new Label(4.2, 5.3, "test", 12, "arial", "left", "black"),
+    new Label(21, 3.6, "test", 28, "arial", "center", "black"),
+    new Label(7.4, 5.2, "test", 21, "arial", "left", "black"),
+    new Label(7.4, 6.6, "test", 21, "arial", "left", "black"),
+    new Label(7.4, 8, "test", 21, "arial", "left", "black"),
     new Button(318, 235, 150, 25, 100, "Confirm", "grey", function() { endTurn("item"); }),
     
     
@@ -115,10 +119,10 @@ var itemselbuttons = [
     tick(); })
 ]
 var infoScreen = [
-  new Label(11,2.5,"info",11,"arial","center","black"),
-  new Label(11,3.5,"info2",11,"arial","center","black"),
-  new Label(11,4.5,"info3",11,"arial","center","black"),
-  new Label(11,5.5,"info4",11,"arial","center","black")
+  new Label(22,4,"info",22,"arial","center","black"),
+  new Label(22,6,"info2",22,"arial","center","black"),
+  new Label(22,8,"info3",22,"arial","center","black"),
+  new Label(22,10,"info4",22,"arial","center","black")
   ]
 var fullscreenButton = new Button(730,1,70,50,80,"fullscreen","grey", function(){document.getElementById("main").requestFullscreen();screen.orientation.lock("landscape");})
 var selectedPMember = 0;
@@ -174,11 +178,11 @@ function guibuttons()
     attackselbuttons[2].show();
     attackselbuttons[3].show();
     attackselbuttons[4].show();
-    attackIcons.drawSpriteCustomSize(5.55,2.35,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[0].type]);
-    attackIcons.drawSpriteCustomSize(5.55,3.25,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[1].type]);
-    attackIcons.drawSpriteCustomSize(5.55,4.15,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[2].type]);
-    attackIcons.drawSpriteCustomSize(5.55,5.05,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[3].type]);
-    attackIcons.drawSpriteCustomSize(5.55,5.95,15,14.1,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[4].type]);
+    attackIcons.drawSpriteCustomSize(10.15,3.65,30,28.2,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[0].type]);
+    attackIcons.drawSpriteCustomSize(10.15,5.45,30,28.2,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[1].type]);
+    attackIcons.drawSpriteCustomSize(10.15,7.25,30,28.2,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[2].type]);
+    attackIcons.drawSpriteCustomSize(10.15,9.05,30,28.2,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[3].type]);
+    attackIcons.drawSpriteCustomSize(10.15,10.95,30,28.2,player.attackTypes[player.weapons[player.party[selectedPMember].weapon].attacks[4].type]);
   }
   if (GUI != 3)
   {
@@ -195,11 +199,11 @@ function guibuttons()
     itemcatselbuttons[2].show();
     itemcatselbuttons[3].show();
     itemcatselbuttons[4].show();
-    itemIcons.drawSpriteCustomSize(5.55,2.35,15,14.1,dungeon.items[player.items[0][0].id].texture);
-    itemIcons.drawSpriteCustomSize(5.55,3.25,15,14.1,dungeon.items[player.items[1][0].id].texture);
-    itemIcons.drawSpriteCustomSize(5.55,4.15,15,14.1,dungeon.items[player.items[2][0].id].texture);
-    itemIcons.drawSpriteCustomSize(5.55,5.05,15,14.1,dungeon.items[player.items[3][0].id].texture);
-    itemIcons.drawSpriteCustomSize(5.55,5.95,15,14.1,dungeon.items[player.items[4][0].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,3.65,30,28.2,dungeon.items[player.items[0][0].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,5.45,30,28.2,dungeon.items[player.items[1][0].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,7.25,30,28.2,dungeon.items[player.items[2][0].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,9.05,30,28.2,dungeon.items[player.items[3][0].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,10.95,30,28.2,dungeon.items[player.items[4][0].id].texture);
   }
   if (GUI != 4)
   {
@@ -216,11 +220,11 @@ function guibuttons()
     itemselbuttons[2].show();
     itemselbuttons[3].show();
     itemselbuttons[4].show();
-    itemIcons.drawSpriteCustomSize(5.55,2.35,15,14.1,dungeon.items[player.items[selecteditemcat][0].id].texture);
-    itemIcons.drawSpriteCustomSize(5.55,3.25,15,14.1,dungeon.items[player.items[selecteditemcat][1].id].texture);
-    itemIcons.drawSpriteCustomSize(5.55,4.15,15,14.1,dungeon.items[player.items[selecteditemcat][2].id].texture);
-    itemIcons.drawSpriteCustomSize(5.55,5.05,15,14.1,dungeon.items[player.items[selecteditemcat][3].id].texture);
-    itemIcons.drawSpriteCustomSize(5.55,5.95,15,14.1,dungeon.items[player.items[selecteditemcat][4].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,3.65,30,28.2,dungeon.items[player.items[selecteditemcat][0].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,5.45,30,28.2,dungeon.items[player.items[selecteditemcat][1].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,7.25,30,28.2,dungeon.items[player.items[selecteditemcat][2].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,9.05,30,28.2,dungeon.items[player.items[selecteditemcat][3].id].texture);
+    itemIcons.drawSpriteCustomSize(10.15,10.95,30,28.2,dungeon.items[player.items[selecteditemcat][4].id].texture);
   }
   if (GUI != 2)
   {
@@ -264,7 +268,7 @@ function rendergui()
     itemInfoText[1].drawLabel();
     itemInfoText[2].drawLabel();
     itemInfoText[3].drawLabel();
-    itemIcons.drawSpriteCustomSize(5,5.4,50,50,dungeon.items[player.items[selecteditemcat][selecteditem].id].texture);
+    itemIcons.drawSpriteCustomSize(8,9.5,100,100,dungeon.items[player.items[selecteditemcat][selecteditem].id].texture);
   }
   if (GUI == 6)
 {
@@ -300,10 +304,10 @@ if (document.fullscreenElement == null)
 else{
   fullscreenButton.hide();
 }
-  PHealth.height = (player.party[selectedPMember].hp / player.party[selectedPMember].maxhp) * 145;
-  EHealth.height = (enemy.types[currentEnemy].hp / enemy.types[currentEnemy].maxhp) * 150;
-  PStamina.width = (player.party[selectedPMember].stamina / player.party[selectedPMember].maxStamina) * 400;
-  PDurability.width = (player.weapons[player.party[selectedPMember].weapon].durability / player.weapons[player.party[selectedPMember].weapon].maxDurability) * 220;
+  PHealth.height = (player.party[selectedPMember].hp / player.party[selectedPMember].maxhp) * 290;
+  EHealth.height = (enemy.types[currentEnemy].hp / enemy.types[currentEnemy].maxhp) * 300;
+  PStamina.width = (player.party[selectedPMember].stamina / player.party[selectedPMember].maxStamina) * 800;
+  PDurability.width = (player.weapons[player.party[selectedPMember].weapon].durability / player.weapons[player.party[selectedPMember].weapon].maxDurability) * 440;
   attackselbuttons[0].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[0].name;
   attackselbuttons[1].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[1].name;
   attackselbuttons[2].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[2].name;

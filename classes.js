@@ -68,7 +68,13 @@ class Cell
   }
   }
   else{
+    if (!this.customSize)
+    {
     ctx.drawImage(this.imgElement,this.x,this.y);
+    }
+    else{
+      ctx.drawImage(this.imgElement,this.x,this.y,this.width,this.height);
+    }
   }
   }
   move(x,y)
