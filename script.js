@@ -117,7 +117,8 @@ var itemselbuttons = [
 var infoScreen = [
   new Label(11,2.5,"info",11,"arial","center","black"),
   new Label(11,3.5,"info2",11,"arial","center","black"),
-  new Label(11,4.5,"info3",11,"arial","center","black")
+  new Label(11,4.5,"info3",11,"arial","center","black"),
+  new Label(11,5.5,"info4",11,"arial","center","black")
   ]
 var fullscreenButton = new Button(730,1,70,50,80,"fullscreen","grey", function(){document.getElementById("main").requestFullscreen();screen.orientation.lock("landscape");})
 var selectedPMember = 0;
@@ -125,6 +126,10 @@ var selectedAttack = 0;
 var selecteditemcat = 0;
 var selecteditem = 0;
 var currentEnemy = 0;
+var enemyStage = 0;
+var enemiesDefeated = 0;
+var enemiesInStage = 0;
+var enemiesDefeatedInStage = 0;
 var player;
 var enemy;
 var database;
@@ -266,6 +271,7 @@ function rendergui()
   infoScreen[0].drawLabel();
   infoScreen[1].drawLabel();
   infoScreen[2].drawLabel();
+  infoScreen[3].drawLabel();
 }
   guibuttons()
 }
@@ -413,6 +419,7 @@ function endTurn(action)
   infoScreen[0].text = "";
   infoScreen[1].text = "";
   infoScreen[2].text = "";
+  infoScreen[3].text = "";
   if (action == "attack")
   {
     GUI = 6;
@@ -496,9 +503,29 @@ function endTurn(action)
   }
   if (enemy.types[currentEnemy].hp < 0)
   {
+    enemiesDefeated += 1;
+    enemiesDefeatedInStage += 1;
+    enemiesInStage = enemy.enemyStages[enemyStage].length;
+    if (enemyStage < enemy.enemyStages.length)
+    {
+    if (enemiesDefeatedInStage == enemiesInStage)
+    {
+      enemyStage += 1;
+      enemiesInStage = enemy.enemyStages[enemyStage].length;
+      enemiesDefeatedInStage = 0;
+    }
     enemy.types[currentEnemy].hp = enemy.types[currentEnemy].maxhp;
-    currentEnemy = RandomInt(0,enemy.types.length - 1);
-    
+    enemy.types[currentEnemy].defeated = true;
+    currentEnemy = currentEnemy = enemy.enemyStages[enemyStage][RandomInt(0,enemy.enemyStages[enemyStage].length - 1)];
+    while (enemy.types[currentEnemy].defeated)
+    {
+      currentEnemy = enemy.enemyStages[enemyStage][RandomInt(0,enemy.enemyStages[enemyStage].length - 1)];
+    }
+    }
+    else{
+      enemy.types[currentEnemy].hp = enemy.types[currentEnemy].maxhp;
+      currentEnemy = RandomInt(0,enemy.types.length - 1);
+    }
   }
   else{
     if (endTurn)
@@ -523,6 +550,10 @@ function enemyTurn()
     infoScreen[2].text += ";";
   }
   enemy.types[currentEnemy].hp += enemy.types[currentEnemy].attacks[enemyattack].healthRecovery - enemy.types[currentEnemy].attacks[enemyattack].healthCost;
+  if (enemy.types[currentEnemy].attacks[enemyattack].healthRecovery - enemy.types[currentEnemy].attacks[enemyattack].healthCost != 0)
+  {
+  infoScreen[3].text += enemy.types[currentEnemy].name + "'s hp changed by " + (enemy.types[currentEnemy].attacks[enemyattack].healthRecovery - enemy.types[currentEnemy].attacks[enemyattack].healthCost);
+  }
   if (enemy.types[currentEnemy].attacks[enemyattack].special != "none")
   {
     if (enemy.types[currentEnemy].attacks[enemyattack].special == "steal")
@@ -537,6 +568,13 @@ function enemyTurn()
       else{
         infoScreen[2].text += " " + enemy.types[currentEnemy].name + " stole " + dungeon.items[player.items[stealitemcat][stealitem].id].name + ";";
       }
+    }
+    else if (enemy.types[currentEnemy].attacks[enemyattack].special == "effect")
+    {
+      let attackeffect = RandomInt(0,enemy.types[currentEnemy].attacks[enemyattack].effects.length - 1);
+      sEffect = enemy.types[currentEnemy].attacks[enemyattack].effects[attackeffect];
+      infoScreen[2].text += " " + enemy.types[currentEnemy].name + " made you " + player.sEffects[attackeffect].name;
+      
     }
   }
   }

@@ -606,7 +606,7 @@
 
       },
       {
-        "name": "focus",
+        "name": "focused",
         "desc": "",
         "critBonus": 30,
         "accuracyBonus": 30,
@@ -637,6 +637,14 @@
         "accuracyBonus": 30,
         "attackBonus": 20,
         "staminaBonus": 1
+},
+{
+        "name": "deoriented",
+        "desc": "",
+        "critBonus": 0,
+        "accuracyBonus": -50,
+        "attackBonus": 0,
+        "staminaBonus": 0.8
 }
       ]
   },
@@ -646,6 +654,8 @@
         "name": "goblin",
         "hp": 50,
         "maxhp": 50,
+        "texture": 1,
+        "defeated": false,
         "attacks": [
           {
             "name": "steal",
@@ -675,7 +685,84 @@
             "special": "none"
           }
           ]
+      },
+      {
+        "name": "bandit",
+        "hp": 70,
+        "maxhp": 70,
+        "texture": 1,
+        "defeated": false,
+        "attacks": [
+          {
+            "name": "steal",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 10,
+            "special": "steal"
+          },
+          {
+            "name": "stab",
+            "damageMin": 5,
+            "damageMax": 8,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 100,
+            "special": "none"
+          },
+          {
+            "name": "recover",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 10,
+            "accuracy": 80,
+            "special": "none"
+          }
+          ]
+      },
+      {
+        "name": "spider",
+        "hp": 20,
+        "maxhp": 20,
+        "texture": 3,
+        "defeated": false,
+        "attacks": [
+          {
+            "name": "poison",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 100,
+            "special": "effect",
+            "effects":[5]
+          },
+          {
+            "name": "bite",
+            "damageMin": 3,
+            "damageMax": 5,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 100,
+            "special": "none"
+          },
+          {
+            "name": "dance",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 3,
+            "accuracy": 70,
+            "special": "none"
+          }
+          ]
       }
-      ]
+      ],
+      "enemyStages":[
+        [0,1],
+        [2]
+        ]
   }
 }
