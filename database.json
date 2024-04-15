@@ -8,7 +8,7 @@
         "mostEffective": 3,
         "texture": 1,
         "effects": {
-          "heal": 10,
+          "heal": 20,
           "damage": 0,
           "selfDamage": 0,
           "staminaRecovery": 0,
@@ -26,7 +26,7 @@
         "amount": 1,
         "texture": 2,
         "effects": {
-          "heal": 20,
+          "heal": 60,
           "damage": 0,
           "selfDamage": 0,
           "staminaRecovery": 0,
@@ -93,7 +93,7 @@
       {
         "name": "the scroll of blood",
         "desc": "a spell that hurts both the user and the enemy",
-        "usableBy": 3,
+        "usableBy": -1,
         "mostEffective": -1,
         "amount": 2,
         "texture": 6,
@@ -200,22 +200,39 @@
         }
       },
       {
-  "name": "fists",
-  "desc": "put away your weapon and attack with your fists",
-  "usableBy": -1,
-  "mostEffective": -1,
-  "amount": 1,
-  "texture": 11,
-  "effects": {
-    "heal": 0,
-    "damage": 0,
-    "selfDamage": 0,
-    "staminaRecovery": 0,
-    "staminaCost": 0,
-    "weaponDurabilityRecovery": 0,
-    "weaponSwitch": 0,
-    "sEffect": 0
-  }
+        "name": "fists",
+        "desc": "put away your weapon and attack with your fists",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "amount": 1,
+        "texture": 11,
+        "effects": {
+          "heal": 0,
+          "damage": 0,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": 0,
+          "sEffect": 0
+        }
+},
+      {
+        "name": "devKillAll",
+        "desc": "",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "texture": 9,
+        "effects": {
+          "heal": 0,
+          "damage": 99999999,
+          "selfDamage": 0,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
 }
 ]
   },
@@ -319,8 +336,8 @@
           "amount": 99
 },
         {
-          "id": 7,
-          "amount": 3
+          "id": 12,
+          "amount": 9999
 },
         {
           "id": 8,
@@ -415,15 +432,50 @@
     },
     "party": [
       {
-        "name": "fredric",
+        "name": "Fredric",
         "class": 1,
         "hp": 50,
         "maxhp": 50,
         "stamina": 50,
         "maxStamina": 50,
         "level": 1,
-        "weapon": 1
-        }
+        "weapon": 1,
+        "unlocked": true
+        },
+      {
+        "name": "Jules",
+        "class": 2,
+        "hp": 45,
+        "maxhp": 45,
+        "stamina": 60,
+        "maxStamina": 60,
+        "level": 1,
+        "weapon": 2,
+        "unlocked": true
+        },
+      {
+        "name": "lorem ipsum",
+        "class": 2,
+        "hp": 45,
+        "maxhp": 45,
+        "stamina": 60,
+        "maxStamina": 60,
+        "level": 1,
+        "weapon": 2,
+        "unlocked": false
+        },
+      {
+        "name": "dolor sit amet",
+        "class": 2,
+        "hp": 45,
+        "maxhp": 45,
+        "stamina": 60,
+        "maxStamina": 60,
+        "level": 1,
+        "weapon": 2,
+        "unlocked": false
+}
+
     ],
     "weapons": [
       {
@@ -593,6 +645,90 @@
             "sEffect": 0
                 }
             ]
+        },
+      {
+        "name": "magic bow",
+        "desc": "a bow that posesses magical abilities",
+        "type": "bow",
+        "durability": 6,
+        "maxDurability": 6,
+        "attacks": [
+          {
+            "name": "quick shot",
+            "desc": "You quickly charge and shoot an arrow",
+            "type": "ranged",
+            "damageMin": 7,
+            "damageMax": 15,
+            "staminaCost": 0,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 1,
+            "durabilityRecovery": 0,
+            "accuracy": 80,
+            "sEffect": 0
+                },
+          {
+            "name": "charged shot",
+            "desc": "you carefully aim and take the shot",
+            "type": "ranged",
+            "damageMin": 20,
+            "damageMax": 25,
+            "staminaCost": 30,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 2,
+            "durabilityRecovery": 0,
+            "accuracy": 100,
+            "sEffect": 5
+                },
+          {
+            "name": "magic arrows",
+            "desc": "you shoot your enemy using magical arrows",
+            "type": "magic",
+            "damageMin": 15,
+            "damageMax": 15,
+            "staminaCost": 0,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 5,
+            "durabilityRecovery": 0,
+            "accuracy": 100,
+            "sEffect": 0
+                },
+          {
+            "name": "focus",
+            "desc": "you focus your thoughts on the enemy",
+            "type": "recovery",
+            "damageMin": 0,
+            "damageMax": 0,
+            "staminaCost": 0,
+            "staminaRecovery": 10,
+            "healthCost": 0,
+            "healthRecovery": 10,
+            "durabilityCost": 0,
+            "durabilityRecovery": 0,
+            "accuracy": 100,
+            "sEffect": 1
+                },
+          {
+            "name": "replace string",
+            "desc": "you replace the string of your bow",
+            "type": "recovery",
+            "damageMin": 0,
+            "damageMax": 0,
+            "staminaCost": 5,
+            "staminaRecovery": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "durabilityCost": 0,
+            "durabilityRecovery": 3,
+            "accuracy": 100,
+            "sEffect": 0
+                }
+            ]
         }
     ],
     "sEffects": [
@@ -630,7 +766,7 @@
         "attackBonus": 0,
         "staminaBonus": 1
 },
-{
+      {
         "name": "Raged",
         "desc": "",
         "critBonus": 0,
@@ -638,7 +774,7 @@
         "attackBonus": 20,
         "staminaBonus": 1
 },
-{
+      {
         "name": "deoriented",
         "desc": "",
         "critBonus": 0,
@@ -656,6 +792,7 @@
         "maxhp": 50,
         "texture": 1,
         "defeated": false,
+        "numDefeated": 0,
         "attacks": [
           {
             "name": "steal",
@@ -692,6 +829,7 @@
         "maxhp": 70,
         "texture": 1,
         "defeated": false,
+        "numDefeated": 0,
         "attacks": [
           {
             "name": "steal",
@@ -728,6 +866,7 @@
         "maxhp": 20,
         "texture": 3,
         "defeated": false,
+        "numDefeated": 0,
         "attacks": [
           {
             "name": "poison",
@@ -737,7 +876,45 @@
             "healthRecovery": 0,
             "accuracy": 100,
             "special": "effect",
-            "effects":[5]
+            "effects": [5]
+          },
+          {
+            "name": "bite",
+            "damageMin": 3,
+            "damageMax": 5,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 100,
+            "special": "none"
+          },
+          {
+            "name": "dance",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 3,
+            "accuracy": 70,
+            "special": "none"
+          }
+          ]
+      },
+      {
+        "name": "young dark wizard",
+        "hp": 50,
+        "maxhp": 50,
+        "texture": 4,
+        "defeated": false,
+        "numDefeated": 0,
+        "attacks": [
+          {
+            "name": "fireball",
+            "damageMin": 7,
+            "damageMax": 15,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 90,
+            "special": "effect",
+            "effects": [5]
           },
           {
             "name": "bite",
@@ -760,9 +937,9 @@
           ]
       }
       ],
-      "enemyStages":[
-        [0,1],
-        [2]
+    "enemyStages": [
+        [0, 1, 2],
+        [3]
         ]
   }
 }
