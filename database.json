@@ -913,25 +913,117 @@
             "healthCost": 0,
             "healthRecovery": 0,
             "accuracy": 90,
-            "special": "effect",
-            "effects": [5]
+            "special": "none"
           },
           {
-            "name": "bite",
+            "name": "absorb",
             "damageMin": 3,
             "damageMax": 5,
+            "healthCost": 0,
+            "healthRecovery": 3,
+            "accuracy": 100,
+            "special": "none"
+          },
+          {
+            "name": "heal",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 10,
+            "accuracy": 90,
+            "special": "none"
+          }
+          ]
+      },
+      {
+        "name": "armored goblin",
+        "hp": 70,
+        "maxhp": 70,
+        "texture": 5,
+        "defeated": false,
+        "numDefeated": 0,
+        "attacks": [
+          {
+            "name": "steal",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 70,
+            "special": "steal"
+          },
+          {
+            "name": "stab",
+            "damageMin": 5,
+            "damageMax": 8,
             "healthCost": 0,
             "healthRecovery": 0,
             "accuracy": 100,
             "special": "none"
           },
           {
-            "name": "dance",
+            "name": "rest",
             "damageMin": 0,
             "damageMax": 0,
             "healthCost": 0,
-            "healthRecovery": 3,
+            "healthRecovery": 9,
+            "accuracy": 80,
+            "special": "none"
+          }
+          ]
+      },
+      {
+        "name": "iron potato",
+        "hp": 100,
+        "maxhp": 100,
+        "texture": 6,
+        "defeated": false,
+        "numDefeated": 0,
+        "attacks": [
+          {
+            "name": "nothing",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 100,
+            "special": "none"
+          }
+          ]
+      },
+      {
+        "name": "large goblin",
+        "hp": 40,
+        "maxhp": 999,
+        "texture": 7,
+        "defeated": false,
+        "numDefeated": 0,
+        "attacks": [
+          {
+            "name": "steal",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
             "accuracy": 70,
+            "special": "steal"
+          },
+          {
+            "name": "gravity",
+            "damageMin": 10,
+            "damageMax": 15,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 100,
+            "special": "none"
+          },
+          {
+            "name": "nothing",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 10,
+            "accuracy": 90,
             "special": "none"
           }
           ]
@@ -939,7 +1031,8 @@
       ],
     "enemyStages": [
         [0, 1, 2],
-        [3]
+        [3,4,5],
+        [6]
         ]
   }
 }
