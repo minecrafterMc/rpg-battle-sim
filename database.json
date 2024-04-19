@@ -20,20 +20,20 @@
           },
       {
         "name": "big healing potion",
-        "desc": "a big healing potion",
+        "desc": "a big healing potion that heals you overtime",
         "usableBy": -1,
         "mostEffective": -1,
         "amount": 1,
         "texture": 2,
         "effects": {
-          "heal": 60,
+          "heal": 15,
           "damage": 0,
           "selfDamage": 0,
           "staminaRecovery": 0,
           "staminaCost": 0,
           "weaponDurabilityRecovery": 0,
           "weaponSwitch": -1,
-          "sEffect": 0
+          "sEffect": 6
         }
 },
       {
@@ -233,6 +233,23 @@
           "weaponSwitch": -1,
           "sEffect": 0
         }
+},
+{
+        "name": "devKillSelf",
+        "desc": "",
+        "usableBy": -1,
+        "mostEffective": -1,
+        "texture": 9,
+        "effects": {
+          "heal": 0,
+          "damage": 0,
+          "selfDamage": 99999,
+          "staminaRecovery": 0,
+          "staminaCost": 0,
+          "weaponDurabilityRecovery": 0,
+          "weaponSwitch": -1,
+          "sEffect": 0
+        }
 }
 ]
   },
@@ -340,8 +357,8 @@
           "amount": 9999
 },
         {
-          "id": 8,
-          "amount": 3
+          "id": 13,
+          "amount": 99999
 },
         {
           "id": 9,
@@ -738,7 +755,9 @@
         "critBonus": 0,
         "accuracyBonus": 0,
         "attackBonus": 0,
-        "staminaBonus": 1
+        "staminaBonus": 1,
+        "protection": 0,
+        "duration": 0
 
       },
       {
@@ -747,7 +766,9 @@
         "critBonus": 30,
         "accuracyBonus": 30,
         "attackBonus": 0,
-        "staminaBonus": 1
+        "staminaBonus": 1,
+        "protection": 0,
+        "duration": 0
 
       },
       {
@@ -756,7 +777,9 @@
         "critBonus": 0,
         "accuracyBonus": 100,
         "attackBonus": 0,
-        "staminaBonus": 1
+        "staminaBonus": 1,
+        "protection": 0,
+        "duration": 0
       },
       {
         "name": "Overwhelmed",
@@ -764,7 +787,9 @@
         "critBonus": 0,
         "accuracyBonus": -30,
         "attackBonus": 0,
-        "staminaBonus": 1
+        "staminaBonus": 1,
+        "protection": 0,
+        "duration": 0
 },
       {
         "name": "Raged",
@@ -772,7 +797,9 @@
         "critBonus": 0,
         "accuracyBonus": 30,
         "attackBonus": 20,
-        "staminaBonus": 1
+        "staminaBonus": 1,
+        "protection": 0,
+        "duration": 0
 },
       {
         "name": "deoriented",
@@ -780,7 +807,20 @@
         "critBonus": 0,
         "accuracyBonus": -50,
         "attackBonus": 0,
-        "staminaBonus": 0.8
+        "staminaBonus": 0.8,
+        "protection": 0,
+        "duration": 0
+},
+{
+        "name": "healing",
+        "desc": "",
+        "critBonus": 0,
+        "accuracyBonus": 0,
+        "attackBonus": 0,
+        "staminaBonus": 1,
+        "protection": -2,
+        "duration": 5,
+        "heal": 10
 }
       ]
   },
@@ -1009,7 +1049,44 @@
             "special": "steal"
           },
           {
-            "name": "gravity",
+            "name": "slam",
+            "damageMin": 10,
+            "damageMax": 15,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 100,
+            "special": "none"
+          },
+          {
+            "name": "nothing",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 10,
+            "accuracy": 90,
+            "special": "none"
+          }
+          ]
+      },
+      {
+        "name": "",
+        "hp": 40,
+        "maxhp": 999,
+        "texture": 7,
+        "defeated": false,
+        "numDefeated": 0,
+        "attacks": [
+          {
+            "name": "steal",
+            "damageMin": 0,
+            "damageMax": 0,
+            "healthCost": 0,
+            "healthRecovery": 0,
+            "accuracy": 70,
+            "special": "steal"
+          },
+          {
+            "name": "slam",
             "damageMin": 10,
             "damageMax": 15,
             "healthCost": 0,

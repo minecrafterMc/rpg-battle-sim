@@ -29,10 +29,10 @@ var PStamina = new Cell(1, 16.16, "yellow", false, "", "UI", 3, true, 800, 17)
 var emptyhbar = new Cell(39, 1.2, "black", false, "", "UI", 3, true, 30, 290)
 var PDurability = new Cell(10.4, 1.3, "blue", false, "", "UI", 3, true, 440, 16)
 var emptydbar = new Cell(10.4, 1.3, "black", false, "", "UI", 3, true, 440, 16)
-var attackButton = new Button(10, 315, 195, 75, 0, "", "", function() { if (GUI != 1) { GUI = 1; } else { GUI = 0; } tick(); });
-var itemButton = new Button(215, 315, 165, 75, 0, "", "", function() { if (GUI != 3) { GUI = 3; } else { GUI = 0; } tick() });
-var switchButton = new Button(390, 315, 205, 75, 0, "", "", function() { if (GUI != 9) { GUI = 9; } else { GUI = 0; } tick() });
-var infoButton = new Button(605, 315, 185, 75, 0, "", "", function() { if (GUI != 6 && GUI != 7 && GUI != 8) { GUI = 6; } else { GUI = 0; } tick(); });
+var attackButton = new Button(10, 315, 195, 75, 0, "", "", function() { if (!lockGUI) { if (GUI != 1) { GUI = 1; } else { GUI = 0; } tick(); } });
+var itemButton = new Button(215, 315, 165, 75, 0, "", "", function() { if (!lockGUI) { if (GUI != 3) { GUI = 3; } else { GUI = 0; } tick() } });
+var switchButton = new Button(390, 315, 205, 75, 0, "", "", function() { if (!lockGUI) { if (GUI != 9) { GUI = 9; } else { GUI = 0; } tick() } });
+var infoButton = new Button(605, 315, 185, 75, 0, "", "", function() { if (!lockGUI) { if (GUI != 6 && GUI != 7 && GUI != 8) { GUI = 6; } else { GUI = 0; } tick(); } });
 var popupLabel = new Label(10.5, 5, "", 27, "arial", "center", "red");
 var itemIcons = new spriteSheet("assets/spritesheets/items.png", 512, 512, 1, 12)
 var attackInfoText = [
@@ -154,12 +154,18 @@ var infoScreen = [
   new Label(20.5, 8, "that happens during the battle, and more.", 22, "arial", "center", "black"),
   new Label(20.5, 10, "Press the buttons below, to get more info.", 22, "arial", "center", "black"),
   new Cell(0.5, 1, "black", true, "assets/images/infoBack.png", "UI", 10, false, 100, 100),
-  new Button(159, 217, 87, 55, 100, "player", "grey", function() { GUI = 7;
-    tick(); }),
-  new Button(346.5, 205, 87, 55, 100, "general", "grey", function() { GUI = 6;
-    tick(); }),
-  new Button(536.4, 217, 87, 55, 100, "enemy", "grey", function() { GUI = 8;
-    tick(); }),
+  new Button(159, 217, 87, 55, 100, "player", "grey", function() {
+    GUI = 7;
+    tick();
+  }),
+  new Button(346.5, 205, 87, 55, 100, "general", "grey", function() {
+    GUI = 6;
+    tick();
+  }),
+  new Button(536.4, 217, 87, 55, 100, "enemy", "grey", function() {
+    GUI = 8;
+    tick();
+  }),
   new Label(20.5, 4, "This is the info screen.", 22, "arial", "center", "black"),
   new Label(20.5, 6, "Here you will get information about everything", 22, "arial", "center", "black"),
   new Label(20.5, 8, "that happens during the battle, and more.", 22, "arial", "center", "black"),
@@ -181,8 +187,10 @@ var switchScreen = [
   new Label(27.5, 4.5, "test", 21, "arial", "center", "black"),
   new Label(27.5, 9.9, "test", 21, "arial", "center", "black")
   ]
-var fullscreenButton = new Button(730, 1, 70, 50, 80, "fullscreen", "grey", function() { document.getElementById("main").requestFullscreen();
-  screen.orientation.lock("landscape"); })
+var fullscreenButton = new Button(730, 1, 70, 50, 80, "fullscreen", "grey", function() {
+  document.getElementById("main").requestFullscreen();
+  screen.orientation.lock("landscape");
+})
 var selectedPMember = 0;
 var selectedAttack = 0;
 var selecteditemcat = 0;
@@ -200,6 +208,9 @@ var sEffect = 0;
 var haltAnim = false;
 var animEBar = true;
 var animating = false;
+var lockGUI = false;
+var partyNum = 0;
+var effectDuration = 0;
 
 function setvar(data)
 {
@@ -207,6 +218,12 @@ function setvar(data)
   player = data.player;
   enemy = data.enemy;
   dungeon = data.dungeon
+  for (let i = 0; i <= 3; i++) {
+    if (player.party[i].unlocked && player.party[i].hp > 0)
+    {
+      partyNum++;
+    }
+  }
 }
 fetch("./database.json")
   .then((res) => {
@@ -439,6 +456,53 @@ function renderframe()
 function tick()
 {
   refreshInfo();
+  if (player.party[0].hp > 0)
+  {
+    switchScreen[4].text = player.party[0].name;
+  }
+  else {
+    switchScreen[4].text = player.party[0].name + " (down)";
+  }
+  if (player.party[1].unlocked)
+  {
+    if (player.party[1].hp > 0)
+    {
+      switchScreen[5].text = player.party[1].name;
+    }
+    else {
+      switchScreen[5].text = player.party[1].name + " (down)";
+    }
+  }
+  else {
+    switchScreen[5].text = "???";
+  }
+  if (player.party[2].unlocked)
+  {
+    if (player.party[2].hp > 0)
+    {
+      switchScreen[6].text = player.party[2].name;
+    }
+    else {
+      switchScreen[6].text = player.party[2].name + " (down)";
+    }
+  }
+  else {
+    switchScreen[6].text = "???";
+  }
+  if (player.party[3].unlocked)
+
+  {
+    if (player.party[3].hp > 0)
+    {
+      switchScreen[7].text = player.party[3].name;
+    }
+    else {
+      switchScreen[7].text = player.party[3].name + " (dead)";
+    }
+  }
+  else {
+    switchScreen[7].text = "???";
+  }
   if (GUI != 6 && GUI != 7 && GUI != 8)
   {
     haltAnim = true;
@@ -457,30 +521,7 @@ function tick()
     EHealth.height = (enemy.types[currentEnemy].hp / enemy.types[currentEnemy].maxhp) * 300
     PHealth.height = (player.party[selectedPMember].hp / player.party[selectedPMember].maxhp) * 290
   }
-  switchScreen[4].text = player.party[0].name;
-  if (player.party[1].unlocked)
-  {
-    switchScreen[5].text = player.party[1].name;
-  }
-  else {
-    switchScreen[5].text = "???";
-  }
-  if (player.party[2].unlocked)
-  {
-    switchScreen[6].text = player.party[2].name;
-  }
-  else {
-    switchScreen[6].text = "???";
-  }
-  if (player.party[3].unlocked)
 
-  {
-
-    switchScreen[7].text = player.party[3].name;
-  }
-  else {
-    switchScreen[7].text = "???";
-  }
   attackselbuttons[0].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[0].name;
   attackselbuttons[1].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[1].name;
   attackselbuttons[2].buttonElement.innerHTML = player.weapons[player.party[selectedPMember].weapon].attacks[2].name;
@@ -618,8 +659,12 @@ function switchPMember(pMember)
 {
   if (player.party[pMember].unlocked)
   {
-    selectedPMember = pMember;
-    endTurn("switch");
+    if (player.party[pMember].hp > 0)
+    {
+      selectedPMember = pMember;
+      endTurn("switch");
+      lockGUI = false;
+    }
   }
   else {
     console.error("not found")
@@ -683,7 +728,14 @@ function endTurn(action)
         infoScreen[0].text += "You missed!"
       }
     }
-    sEffect = player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].sEffect;
+    if (effectDuration == 0 || player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].sEffect != 0)
+    {
+      sEffect = player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].sEffect;
+      effectDuration = player.sEffects[player.weapons[player.party[selectedPMember].weapon].attacks[selectedAttack].sEffect].duration;
+    }
+    else {
+      effectDuration -= 1;
+    }
   }
   else if (action == "item")
   {
@@ -707,7 +759,17 @@ function endTurn(action)
         else if (player.party[selectedPMember].hp < 0) { player.party[selectedPMember].hp = 0 }
         if (player.party[selectedPMember].stamina > player.party[selectedPMember].maxStamina) { player.party[selectedPMember].stamina = player.party[selectedPMember].maxStamina }
         else if (player.party[selectedPMember].stamina < 0) { player.party[selectedPMember].stamina = 0 }
-        sEffect = dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.sEffect;
+        if (effectDuration == 0 || dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.sEffect != 0)
+
+        {
+          sEffect = dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.sEffect;
+          effectDuration = player.sEffects[dungeon.items[player.items[selecteditemcat][selecteditem].id].effects.sEffect].duration;
+        }
+
+        else {
+
+          effectDuration -= 1;
+        }
       }
       else {
         endTurn = false;
@@ -761,6 +823,18 @@ function enemyTurn()
   if (RandomInt(1, 100) < enemy.types[currentEnemy].attacks[enemyattack].accuracy)
   {
     let enemydamage = RandomInt(enemy.types[currentEnemy].attacks[enemyattack].damageMin, enemy.types[currentEnemy].attacks[enemyattack].damageMax);
+    if (player.sEffects[sEffect].protection >= 0)
+    {
+      enemydamage -= player.sEffects[sEffect].protection;
+    }
+    else if (player.sEffects[sEffect].protection == -1)
+    {
+      enemydamage = 0;
+    }
+    else if (player.sEffects[sEffect].protection == -2)
+    {
+      player.party[selectedPMember].hp += player.sEffects[sEffect].heal;
+    }
     player.party[selectedPMember].hp -= enemydamage;
     infoScreen[2].text += enemy.types[currentEnemy].name + " used " + enemy.types[currentEnemy].attacks[enemyattack].name;
     if (enemydamage != 0)
@@ -768,6 +842,10 @@ function enemyTurn()
       infoScreen[2].text += " and delt " + enemydamage + " damage;";
     }
     else {
+      if (player.sEffects[sEffect].protection == -1)
+      {
+        infoScreen[2].text += ""
+      }
       infoScreen[2].text += ";";
     }
     enemy.types[currentEnemy].hp += enemy.types[currentEnemy].attacks[enemyattack].healthRecovery - enemy.types[currentEnemy].attacks[enemyattack].healthCost;
@@ -791,20 +869,31 @@ function enemyTurn()
           player.items[stealitemcat][stealitem].amount = 0;
         }
         else {
-          infoScreen[2].text += " " + enemy.types[currentEnemy].name + " stole " + dungeon.items[player.items[stealitemcat][stealitem].id].name + ";";
+          infoScreen[2].text += " and stole " + dungeon.items[player.items[stealitemcat][stealitem].id].name + ";";
         }
       }
       else if (enemy.types[currentEnemy].attacks[enemyattack].special == "effect")
       {
         let attackeffect = RandomInt(0, enemy.types[currentEnemy].attacks[enemyattack].effects.length - 1);
         sEffect = enemy.types[currentEnemy].attacks[enemyattack].effects[attackeffect];
-        infoScreen[2].text += " " + enemy.types[currentEnemy].name + " made you " + player.sEffects[enemy.types[currentEnemy].attacks[enemyattack].effects[attackeffect]].name + ";";
+        infoScreen[2].text += " and made you " + player.sEffects[enemy.types[currentEnemy].attacks[enemyattack].effects[attackeffect]].name + ";";
 
       }
     }
   }
   else {
     infoScreen[2].text = enemy.types[currentEnemy].name + " missed!";
+  }
+  if (player.party[selectedPMember].hp <= 0)
+  {
+    lockGUI = true;
+    GUI = 9
+    switchScreen[selectedPMember + 4].text += " (down)";
+    partyNum--;
+    if (partyNum == 0)
+    {
+      loose();
+    }
   }
   animateBars();
 }
@@ -828,6 +917,11 @@ async function animateBars()
   PHealth.height = (player.party[selectedPMember].hp / player.party[selectedPMember].maxhp) * 290*/
   await sleep(2000)
   animating = false;
+}
+
+function loose()
+{
+  console.log("loose");
 }
 
 function resetPopup()
